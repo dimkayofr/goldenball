@@ -1,0 +1,2006 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Золотой мяч: все номинанты 2000–2026</title>
+<style>
+  :root{--bg:#ffffff;--ink:#1a1a1a;--muted:#6b7280;--line:#e5e7eb;--line-strong:#d1d5db;--top-h:340px;}
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    padding:clamp(16px,2.5vw,40px);max-width:2500px;width:100%;margin:0 auto;overflow-x:hidden;}
+  header{margin-bottom:20px}
+  h1{font-size:24px;margin:0 0 6px;font-weight:700;letter-spacing:-.01em}
+  .sub{color:var(--muted);font-size:14px;margin:0}
+  #controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:18px 0 12px}
+  .btn{padding:7px 14px;border-radius:9px;border:1px solid var(--line-strong);
+    background:#fff;color:var(--ink);cursor:pointer;font-size:13px;font-weight:500;transition:background .15s;}
+  .btn:hover{background:#f3f4f6}
+  .btn.active{background:#eff6ff;border-color:#2563eb;color:#1d4ed8;}
+  .toggle{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;
+    border-radius:9px;border:1px solid var(--line-strong);background:#fff;font-size:13px;cursor:pointer;user-select:none;}
+  .toggle input{accent-color:#2563eb;margin:0}
+  .dropdown{position:relative;display:inline-block}
+  .dropdown-trigger{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:9px;
+    border:1px solid var(--line-strong);background:#fff;font-size:13px;cursor:pointer;font-family:inherit;min-width:130px;}
+  .dropdown-trigger .arrow{margin-left:auto;font-size:10px;color:#6b7280}
+  .dropdown-trigger.active{border-color:#2563eb;background:#eff6ff}
+  .dropdown-panel{position:absolute;top:calc(100% + 4px);left:0;z-index:200;background:#fff;
+    border:1px solid var(--line-strong);border-radius:10px;padding:6px;min-width:220px;max-height:340px;
+    overflow-y:auto;box-shadow:0 10px 30px rgba(0,0,0,.12);display:none;}
+  .dropdown-panel.open{display:block}
+  .dropdown-panel label{display:flex;align-items:center;gap:8px;padding:6px 10px;cursor:pointer;
+    font-size:13px;border-radius:6px;user-select:none;}
+  .dropdown-panel label:hover{background:#f3f4f6}
+  .dropdown-panel label input{accent-color:#2563eb;margin:0}
+  .dropdown-panel hr{border:none;border-top:1px solid var(--line);margin:4px 0}
+  .filter-select{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:9px;
+    border:1px solid var(--line-strong);background:#fff;font-size:13px;}
+  .filter-select select{border:none;outline:none;font-size:13px;background:transparent;cursor:pointer;padding:2px 4px;font-family:inherit;}
+  #filterInfo{font-size:12.5px;color:var(--muted);margin:-4px 0 12px;min-height:18px;}
+  #filterInfo strong{color:#2563eb}
+  #filterInfo .warn{color:#d97706;font-weight:500}
+
+  #chips{display:flex;flex-wrap:wrap;gap:6px;min-height:0}
+  .chip{display:inline-flex;align-items:center;gap:7px;padding:5px 11px 5px 8px;border-radius:999px;
+    background:#f9fafb;border:1px solid var(--line);font-size:12.5px;cursor:pointer;user-select:none;
+    font-family:inherit;color:var(--ink);transition:opacity .15s,background .15s,border-color .15s,box-shadow .15s;}
+  .chip:hover{background:#eff6ff;border-color:#93c5fd;box-shadow:0 0 0 2px rgba(37,99,235,.15);}
+  .chip .sw{width:11px;height:11px;border-radius:50%;flex-shrink:0}
+  .chip .x{color:#9ca3af;font-size:14px;line-height:1}
+  .chip .x:hover{color:#b91c1c}
+
+  #topBar{display:flex;gap:16px;margin-bottom:12px;align-items:flex-start;}
+  #chipsCol{flex:6;min-width:0;max-height:var(--top-h);overflow-y:auto;padding-right:2px;}
+  #summaryCol{flex:5;min-width:0;max-height:var(--top-h);overflow-y:auto;}
+  #topBar:has(#chips:empty) #chipsCol{display:none;}
+  #topBar:has(#chips:empty) #summaryCol{flex:1;}
+  #topBar.hide-chips #chipsCol{display:none;}
+  #topBar.hide-chips #summaryCol{flex:1;}
+  #topBar.hide-summary #summaryCol{display:none;}
+  #topBar.hide-summary #chipsCol{flex:1;}
+  #topBar.hide-chips.hide-summary{display:none;}
+  #topBar.hide-summary #summaryCol { display: none; }
+  #topBar.hide-summary #chipsCol { flex: 1; }
+
+    #summaryTable tbody tr.summary-sum td {
+    border-top: 2px solid var(--line-strong);
+    background: #f3f4f6;
+    font-weight: 600;
+  }
+  #summaryTable tbody tr.summary-sum { cursor: default; }
+  #summaryTable{border-collapse:collapse;font-size:12px;background:#fff;
+    border:1px solid var(--line);border-radius:8px;overflow:hidden;width:100%;table-layout:fixed;}
+  #summaryTable thead th{background:#f9fafb;padding:6px 8px;border-bottom:1px solid var(--line);
+    font-weight:600;color:var(--muted);font-size:11px;text-align:left;white-space:nowrap;
+    position:sticky;top:0;z-index:1;}
+  #summaryTable tbody td{padding:4px 8px;border-bottom:1px solid var(--line);white-space:nowrap;
+    overflow:hidden;text-overflow:ellipsis;}
+  #summaryTable tbody tr:last-child td{border-bottom:none}
+  #summaryTable th:nth-child(1),#summaryTable td:nth-child(1){width:28%}
+  #summaryTable th:nth-child(2),#summaryTable td:nth-child(2){width:11%}
+  #summaryTable th:nth-child(3),#summaryTable td:nth-child(3){width:11%}
+  #summaryTable th:nth-child(4),#summaryTable td:nth-child(4){width:28%}
+  #summaryTable th:nth-child(5),#summaryTable td:nth-child(5){width:11%}
+  #summaryTable th:nth-child(6),#summaryTable td:nth-child(6){width:11%}
+  #summaryTable th:nth-child(2),#summaryTable td:nth-child(2),
+  #summaryTable th:nth-child(3),#summaryTable td:nth-child(3),
+  #summaryTable th:nth-child(5),#summaryTable td:nth-child(5),
+  #summaryTable th:nth-child(6),#summaryTable td:nth-child(6){
+    text-align:right;font-variant-numeric:tabular-nums;color:var(--ink);
+  }
+  #summaryTable th:nth-child(4),#summaryTable td:nth-child(4){border-left:1px solid var(--line)}
+  #summaryBody{display:table-row-group}
+    #chartOuter.fullscreen {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    border-radius: 0;
+    border: none;
+    background: #fff;
+  }
+  #chartOuter.fullscreen #chartWrap {
+    height: calc(100vh - 16px);
+    overflow: auto;
+  }
+  #chartOuter .fullscreen-exit { display: none; }
+#chartOuter.fullscreen .fullscreen-exit {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 20;
+  padding: 7px 12px;
+  border-radius: 9px;
+  border: 1px solid var(--line-strong);
+  background: #fff;
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 13px;
+  font-family: inherit;
+}
+#chartOuter.fullscreen .fullscreen-exit:hover { background: #f3f4f6; }
+#chartOuter.fullscreen #zoomHint { display: none; }
+  #chartOuter{background:#fff;border:1px solid var(--line);border-radius:12px;position:relative;overflow:hidden;}
+  #chartWrap{padding:8px;overflow-x:auto;overflow-y:hidden;}
+  svg{display:block;min-width:600px;width:100%;height:auto;touch-action:pan-x pan-y;cursor:grab}
+  svg.hover-point { cursor: pointer; }
+  svg text{user-select:none;-webkit-user-select:none;pointer-events:none}  
+  svg.dragging{cursor:grabbing}
+  #zoomHint{position:absolute;right:14px;top:12px;font-size:11.5px;color:#6b7280;
+    background:rgba(255,255,255,.9);padding:5px 9px;border-radius:7px;border:1px solid var(--line);
+    pointer-events:none;user-select:none;z-index:10;}
+  #emptyHint{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:#9ca3af;font-size:14px;
+    text-align:center;pointer-events:none;line-height:1.5;background:rgba(255,255,255,.85);
+    padding:10px 18px;border-radius:10px;z-index:10;}
+  #emptyHint.hidden{display:none}
+
+  @media (max-width:720px){
+    #topBar{flex-direction:column;gap:10px;}
+    #chipsCol,#summaryCol{flex:1 1 auto;width:100%;max-height:240px;}
+  }
+
+  #allPlayersSection{margin-top:32px}
+  #allPlayersSection h2{font-size:18px;margin:0 0 6px}
+  #allPlayersSection .hint{color:var(--muted);font-size:13px;margin:0 0 12px}
+  #searchAll{padding:8px 12px;border-radius:9px;border:1px solid var(--line-strong);font-size:13px;width:260px;margin-bottom:12px;}
+  #allTableWrap{border:1px solid var(--line);border-radius:12px;overflow:auto;max-height:480px;}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  thead th{position:sticky;top:0;background:#f9fafb;text-align:left;padding:9px 12px;
+    border-bottom:1px solid var(--line-strong);font-weight:600;font-size:12px;color:var(--muted);white-space:nowrap;z-index:1;}
+  thead th.sortable{cursor:pointer;user-select:none}
+  thead th.sortable:hover{color:#111}
+  thead th .sort-ind{margin-left:4px;font-size:10px;opacity:.5}
+  thead th.sort-active .sort-ind{opacity:1;color:#2563eb}
+  thead th.sort-active{color:#111}
+  tbody td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  tbody tr{cursor:pointer;transition:background .1s}
+  tbody tr:hover{background:#f9fafb}
+  tbody tr.on-graph{background:#eff6ff}
+  tbody tr.on-graph:hover{background:#dbeafe}
+  .name-cell{font-weight:500}
+  .years-cell{color:var(--muted);font-size:12px}
+  .country-cell{color:var(--muted);font-size:12px}
+  .best-cell{font-weight:600}
+  .count-cell{text-align:center;font-variant-numeric:tabular-nums}
+  .on-badge{display:inline-block;font-size:10px;padding:1px 6px;border-radius:6px;
+    background:#2563eb;color:#fff;margin-left:6px;vertical-align:middle;}
+  .empty-row{text-align:center;color:var(--muted);font-style:italic;padding:20px}
+  .notes{margin-top:24px;font-size:12.5px;color:var(--muted);line-height:1.6}
+  .notes strong{color:var(--ink)}
+  .notes ul{margin:6px 0 0;padding-left:20px}
+  .notes li{margin:3px 0}
+  #tooltip{position:fixed;pointer-events:none;z-index:9999;background:rgba(17,24,39,.96);color:#fff;
+    padding:9px 12px;border-radius:9px;font-size:13px;line-height:1.4;opacity:0;transition:opacity .12s;
+    box-shadow:0 8px 24px rgba(0,0,0,.28);white-space:nowrap;}
+  #tooltip .nm{font-weight:600;display:flex;align-items:center;gap:7px}
+  #tooltip .dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+  #tooltip .mt{color:#c7cdd4;font-size:12px;margin-top:2px}
+</style>
+<script src="https://telegram.org/js/telegram-web-app.js" async></script>
+</head>
+<body>
+
+<header>
+  <h1>«Золотой мяч»: все номинанты 2000-2026</h1>
+  <p class="sub">Фильтры по умолчанию: топ-3 за последние 3 года (2024–2026)</p>
+</header>
+
+<div id="controls">
+  <div class="dropdown" id="yearDropdown">
+    <button type="button" class="dropdown-trigger" id="yearTrigger">
+      <span id="yearLabel">Все годы</span><span class="arrow">▾</span>
+    </button>
+    <div class="dropdown-panel" id="yearPanel">
+      <input type="search" class="panel-search" data-search-for="yearPanel" placeholder="Поиск года…" style="width:calc(100% - 12px);margin:6px 6px 4px;padding:5px 8px;border:1px solid var(--line);border-radius:6px;font-size:12.5px;font-family:inherit">
+      <label><input type="checkbox" data-year="all"> Все годы</label><hr>
+    </div>
+  </div>
+  <span class="filter-select">
+    <label for="placeFilter" style="color:#6b7280">Место:</label>
+    <select id="placeFilter">
+      <option value="30">Все (1–30)</option>
+      <option value="20">Топ-20</option>
+      <option value="10">Топ-10</option>
+      <option value="5">Топ-5</option>
+      <option value="3" selected>Топ-3</option>
+      <option value="1">Топ-1</option>
+    </select>
+  </span>
+  <span class="filter-select">
+    <label for="nomFilter" style="color:#6b7280">Номинаций:</label>
+    <select id="nomFilter">
+      <option value="0" selected>Все</option>
+      <option value="3">&gt; 3</option>
+      <option value="5">&gt; 5</option>
+      <option value="7">&gt; 7</option>
+      <option value="10">&gt; 10</option>
+    </select>
+  </span>
+  <div class="dropdown" id="countryDropdown">
+    <button type="button" class="dropdown-trigger" id="countryTrigger">
+      <span id="countryLabel">Все страны</span><span class="arrow">▾</span>
+    </button>
+      <div class="dropdown-panel" id="countryPanel">
+      <input type="search" class="panel-search" data-search-for="countryPanel" placeholder="Поиск страны…" style="width:calc(100% - 12px);margin:6px 6px 4px;padding:5px 8px;border:1px solid var(--line);border-radius:6px;font-size:12.5px;font-family:inherit">
+      <label><input type="checkbox" data-country="all" checked> Все страны</label><hr>
+    </div>
+  </div>
+  <div class="dropdown" id="clubDropdown">
+    <button type="button" class="dropdown-trigger" id="clubTrigger">
+      <span id="clubLabel">Все клубы</span><span class="arrow">▾</span>
+    </button>
+    <div class="dropdown-panel" id="clubPanel">
+      <input type="search" class="panel-search" data-search-for="clubPanel" placeholder="Поиск клуба…" style="width:calc(100% - 12px);margin:6px 6px 4px;padding:5px 8px;border:1px solid var(--line);border-radius:6px;font-size:12.5px;font-family:inherit">
+      <label><input type="checkbox" data-club="all" checked> Все клубы</label><hr>
+    </div>
+  </div>
+  <button class="btn" id="downloadPng" title="Скачать PNG" aria-label="Скачать график в PNG">⤓ PNG</button>
+  <button class="btn" id="zoomIn" title="Приблизить">＋</button>
+  <button class="btn" id="zoomOut" title="Отдалить">−</button>
+  <button class="btn" id="toggleFullscreen" title="Во весь экран" aria-label="График на весь экран">⛶</button>
+  <button class="btn" id="zoomReset" title="Сбросить фильтры и зум графика">Сброс</button>
+  <button class="btn" id="toggleNoVotes">Скрыть игроков без голосов</button>
+  <button class="btn" id="toggleFilteredPoints" title="Показать только точки, соответствующие текущим фильтрам">Только выбранные годы</button>
+  <button class="btn" id="toggleChips" title="Свернуть/развернуть список игроков">Скрыть имена</button>
+  <button class="btn" id="toggleSummary" title="Свернуть/развернуть сводную таблицу клубов и стран">Скрыть таблицу</button>
+</div>
+
+<div id="filterInfo"></div>
+
+<div id="topBar">
+  <div id="chipsCol">
+    <div id="chips"></div>
+  </div>
+  <div id="summaryCol">
+    <table id="summaryTable">
+      <thead>
+        <tr>
+          <th>Клуб</th>
+          <th title="Уникальных игроков на графике">Игроков</th>
+          <th title="Сумма номинаций этих игроков за клуб">Номин.</th>
+          <th>Страна</th>
+          <th title="Уникальных игроков на графике">Игроков</th>
+          <th title="Сумма номинаций этих игроков за страну">Номин.</th>
+        </tr>
+      </thead>
+      <tbody id="summaryBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<div id="chartOuter">
+  <div id="chartWrap"></div>
+  <div id="emptyHint">Нет подходящих игроков. Измените фильтры.</div>
+  <button class="fullscreen-exit" id="exitFullscreen" aria-label="Выйти из полноэкранного режима">✕</button>
+</div>
+
+<div id="allPlayersSection">
+  <h2>Все номинанты (2000–2026)</h2>
+  <p class="hint">Полный список игроков, номинированных на награду. Клик по строке добавляет/убирает игрока на графике.</p>
+  <input type="search" id="searchAll" placeholder="Поиск по имени, стране или клубу…">
+  <div id="allTableWrap">
+    <table id="allTable">
+      <thead>
+        <tr>
+          <th class="sortable" data-sort="name">Игрок<span class="sort-ind">▲</span></th>
+          <th>Страна</th>
+          <th>Годы в топ-30</th>
+          <th class="sortable" data-sort="best">Лучший результат<span class="sort-ind">▲</span></th>
+          <th class="sortable" data-sort="count" style="text-align:center">Номинаций<span class="sort-ind">▲</span></th>
+        </tr>
+      </thead>
+      <tbody id="allTableBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="notes">
+  <strong>Примечания:</strong>
+  <ul>
+    <li>2020 год — награда не вручалась из-за COVID-19.</li>
+    <li>Место <strong>31</strong> в поле <code>d</code> означает «в этом году голосов не было». Обычное 30-е место — это место с голосами. Внутри данные приводятся к 30 + пометка, поэтому фильтр по месту и ось Y работают как обычно. Такие номинации в каждом году размещаются строго ниже всех, кто получил голоса.</li>
+    <li><strong>Пунктир</strong> между точками означает пропуск года (или награда не вручалась).</li>
+    <li><strong>Совпавшие места:</strong> 2–3 игрока разводятся по горизонтали; более 4 игроков — по вертикали (первый по алфавиту остаётся, остальные опускаются вниз).</li>
+    <li><strong>30 место:</strong> игроки, не получавшие голосов, показываются на 30 месте (и ниже, если их больше 4).</li>
+  </ul>
+</div>
+
+<div id="tooltip"></div>
+
+<script>
+(function(){
+  // Инициализация Telegram Mini App — с ожиданием загрузки SDK
+  function initTelegram(){
+    if (window.Telegram && window.Telegram.WebApp) {
+      window.Telegram.WebApp.ready();
+      window.Telegram.WebApp.expand();
+      return true;
+    }
+    return false;
+  }
+  if (!initTelegram()) {
+    let tries = 0;
+    const timer = setInterval(() => {
+      if (initTelegram() || ++tries > 50) clearInterval(timer);
+    }, 100); // проверяем до 5 секунд
+  }
+  const svgNS = 'http://www.w3.org/2000/svg';
+  const years = [2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,
+                 2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,
+                 2021,2022,2023,2024,2025,2026];
+
+  const allPlayersData = [
+    // ===== 2000-2003 =====
+    {name:'Фигу', c:'Португалия', d:{2000:1,2001:6,2002:19,2003:31,2004:22,2005:31},
+     cl:{2000:'Барселона / Реал Мадрид',2001:'Реал Мадрид',2002:'Реал Мадрид',2003:'Реал Мадрид',2004:'Реал Мадрид',2005:'Интернационале'}},
+    {name:'Зидан', c:'Франция', d:{2000:2,2001:9,2002:4,2003:5,2004:23,2005:18,2006:5},
+     cl:{2000:'Ювентус',2001:'Ювентус / Реал Мадрид',2002:'Реал Мадрид',2003:'Реал Мадрид',2004:'Реал Мадрид',2005:'Реал Мадрид',2006:'Реал Мадрид'}},
+    {name:'Шевченко', c:'Украина', d:{2000:3,2001:8,2003:4,2004:1,2005:5,2006:31},
+     cl:{2000:'Милан',2001:'Милан',2003:'Милан',2004:'Милан',2005:'Милан',2006:'Милан / Челси'}},
+    {name:'Анри', c:'Франция', d:{2000:4,2001:9,2002:6,2003:2,2004:4,2005:4,2006:3,2007:18,2009:15},
+     cl:{2000:'Арсенал',2001:'Арсенал',2002:'Арсенал',2003:'Арсенал',2004:'Арсенал',2005:'Арсенал',2006:'Арсенал',2007:'Арсенал / Барселона',2009:'Барселона'}},
+    {name:'Неста', c:'Италия', d:{2000:5,2001:14,2003:13,2004:31,2007:18},
+     cl:{2000:'Лацио',2001:'Лацио',2003:'Милан',2004:'Милан',2007:'Милан'}},
+    {name:'Ривалдо', c:'Бразилия', d:{2000:5,2001:7,2002:8},
+     cl:{2000:'Барселона',2001:'Барселона',2002:'Барселона / Милан'}},
+    {name:'Батистута', c:'Аргентина', d:{2000:7,2001:31},
+     cl:{2000:'Фиорентина / Рома',2001:'Рома'}},
+    {name:'Мендьета', c:'Испания', d:{2000:8,2001:18},
+     cl:{2000:'Валенсия',2001:'Валенсия / Лацио'}},
+    {name:'Рауль', c:'Испания', d:{2000:9,2001:2,2002:7,2003:7,2005:31,2007:31},
+     cl:{2000:'Реал Мадрид',2001:'Реал Мадрид',2002:'Реал Мадрид',2003:'Реал Мадрид',2005:'Реал Мадрид',2007:'Реал Мадрид'}},
+    {name:'Мальдини', c:'Италия', d:{2000:10,2002:31,2003:3,2004:28,2005:6,2007:18},
+     cl:{2000:'Милан',2002:'Милан',2003:'Милан',2004:'Милан',2005:'Милан',2007:'Милан'}},
+    {name:'Бэкхем', c:'Англия', d:{2000:10,2001:4,2002:31,2003:10,2004:31,2005:31,2007:31},
+     cl:{2000:'Манчестер Юнайтед',2001:'Манчестер Юнайтед',2002:'Манчестер Юнайтед',2003:'Манчестер Юнайтед / Реал Мадрид',2004:'Реал Мадрид',2005:'Реал Мадрид',2007:'Реал Мадрид / Лос-Анджелес Гэлакси'}},
+    {name:'Захович', c:'Словения', d:{2000:12}, cl:{2000:'Валенсия'}},
+    {name:'Бартез', c:'Франция', d:{2000:12,2001:31,2004:31},
+     cl:{2000:'Манчестер Юнайтед',2001:'Манчестер Юнайтед',2004:'Марсель'}},
+    {name:'Тольдо', c:'Италия', d:{2000:14,2003:22},
+     cl:{2000:'Фиорентина',2003:'Интернационале'}},
+    {name:'Тотти', c:'Италия', d:{2000:14,2001:5,2002:31,2003:18,2004:31,2007:10},
+     cl:{2000:'Рома',2001:'Рома',2002:'Рома',2003:'Рома',2004:'Рома',2007:'Рома'}},
+    {name:'Роберто Карлос', c:'Бразилия', d:{2000:14,2001:18,2002:2,2003:8,2005:31},
+     cl:{2000:'Реал Мадрид',2001:'Реал Мадрид',2002:'Реал Мадрид',2003:'Реал Мадрид',2005:'Реал Мадрид'}},
+    {name:'Клюйверт', c:'Нидерланды', d:{2000:17,2001:31,2002:31,2003:31},
+     cl:{2000:'Барселона',2001:'Барселона',2002:'Барселона',2003:'Барселона'}},
+    {name:'Давидс', c:'Нидерланды', d:{2000:18}, cl:{2000:'Ювентус'}},
+    {name:'Шукюр', c:'Турция', d:{2000:18}, cl:{2000:'Интернационале'}},
+    {name:'Жардел', c:'Бразилия', d:{2000:18}, cl:{2000:'Галатасарай'}},
+    {name:'Редондо', c:'Аргентина', d:{2000:18}, cl:{2000:'Милан'}},
+    {name:'Недвед', c:'Чехия', d:{2000:22,2001:31,2003:1,2004:7,2005:23},
+     cl:{2000:'Лацио',2001:'Лацио / Ювентус',2003:'Ювентус',2004:'Ювентус',2005:'Ювентус'}},
+    {name:'Кан', c:'Германия', d:{2000:24,2001:3,2002:3,2003:31},
+     cl:{2000:'Бавария',2001:'Бавария',2002:'Бавария',2003:'Бавария'}},
+    {name:'Руй Кошта', c:'Португалия', d:{2000:24,2001:25},
+     cl:{2000:'Фиорентина',2001:'Фиорентина / Милан'}},
+    {name:'Лопес', c:'Аргентина', d:{2000:27}, cl:{2000:'Валенсия'}},
+    {name:'Блан', c:'Франция', d:{2000:27}, cl:{2000:'Интернационале'}},
+    {name:'Рой Кин', c:'Ирландия', d:{2000:27}, cl:{2000:'Манчестер Юнайтед'}},
+    {name:'Верон', c:'Аргентина', d:{2000:27,2001:16},
+     cl:{2000:'Лацио',2001:'Лацио / Манчестер Юнайтед'}},
+    {name:'Сонни Андерсон', c:'Бразилия', d:{2000:31,2001:31,2002:31},
+     cl:{2000:'Лион',2001:'Лион',2002:'Лион'}},
+    {name:'Анелька', c:'Франция', d:{2000:31}, cl:{2000:'Реал Мадрид / ПСЖ'}},
+    {name:'Англома', c:'Франция', d:{2000:31}, cl:{2000:'Валенсия'}},
+    {name:'Бергкамп', c:'Нидерланды', d:{2000:31}, cl:{2000:'Арсенал'}},
+    {name:'Креспо', c:'Аргентина', d:{2000:31,2001:16},
+     cl:{2000:'Парма / Лацио',2001:'Лацио'}},
+    {name:'Дешам', c:'Франция', d:{2000:31}, cl:{2000:'Челси / Валенсия'}},
+    {name:'Гальярдо', c:'Аргентина', d:{2000:31}, cl:{2000:'Монако'}},
+    {name:'Нжитап', c:'Камерун', d:{2000:31}, cl:{2000:'Реал Мадрид'}},
+    {name:'Гиггз', c:'Уэльс', d:{2000:31,2001:31,2002:31,2007:30,2009:14},
+     cl:{2000:'Манчестер Юнайтед',2001:'Манчестер Юнайтед',2002:'Манчестер Юнайтед',2007:'Манчестер Юнайтед',2009:'Манчестер Юнайтед'}},
+    {name:'Индзаги', c:'Италия', d:{2000:31,2002:24,2003:22,2007:16},
+     cl:{2000:'Ювентус',2002:'Милан',2003:'Милан',2007:'Милан'}},
+    {name:'Мбома', c:'Камерун', d:{2000:31}, cl:{2000:'Кальяри / Парма'}},
+    {name:'Милошевич', c:'Сербия', d:{2000:31}, cl:{2000:'Реал Сарагоса / Парма'}},
+    {name:'Гомеш', c:'Португалия', d:{2000:31}, cl:{2000:'Бенфика / Фиорентина'}},
+    {name:'Рекоба', c:'Уругвай', d:{2000:31}, cl:{2000:'Интернационале'}},
+    {name:'Скоулз', c:'Англия', d:{2000:31,2001:31,2003:31,2004:31,2007:31},
+     cl:{2000:'Манчестер Юнайтед',2001:'Манчестер Юнайтед',2003:'Манчестер Юнайтед',2004:'Манчестер Юнайтед',2007:'Манчестер Юнайтед'}},
+    {name:'Симоне', c:'Италия', d:{2000:31}, cl:{2000:'Монако'}},
+    {name:'Стам', c:'Нидерланды', d:{2000:31}, cl:{2000:'Манчестер Юнайтед'}},
+    {name:'Виейра', c:'Франция', d:{2000:31,2001:31,2002:15,2003:31,2004:31,2005:31,2006:14},
+     cl:{2000:'Бордо / Арсенал',2001:'Арсенал',2002:'Арсенал',2003:'Арсенал',2004:'Арсенал',2005:'Ювентус',2006:'Интернационале'}},
+    {name:'Вильтор', c:'Франция', d:{2000:31,2002:31,2003:31},
+     cl:{2000:'Арсенал',2002:'Арсенал',2003:'Арсенал'}},
+    {name:'Зенден', c:'Нидерланды', d:{2000:31}, cl:{2000:'Барселона'}},
+    // 2001
+    {name:'Оуэн', c:'Англия', d:{2001:1,2002:13,2003:31,2005:31},
+     cl:{2001:'Ливерпуль',2002:'Ливерпуль',2003:'Ливерпуль',2005:'Реал Мадрид / Ньюкасл'}},
+    {name:'Лизаразю', c:'Франция', d:{2001:11}, cl:{2001:'Бавария'}},
+    {name:'Трезеге', c:'Франция', d:{2000:22,2001:12,2002:31,2003:31,2005:31},
+     cl:{2000:'Ювентус',2001:'Ювентус',2002:'Ювентус',2003:'Ювентус',2005:'Ювентус'}},
+    {name:'Эффенберг', c:'Германия', d:{2001:13}, cl:{2001:'Бавария'}},
+    {name:'Ларссон', c:'Швеция', d:{2001:14,2002:12,2003:12,2004:31},
+     cl:{2001:'Селтик',2002:'Селтик',2003:'Селтик',2004:'Барселона'}},
+    {name:'Элбер', c:'Бразилия', d:{2001:18,2003:31},
+     cl:{2001:'Бавария',2003:'Бавария / Лион'}},
+    {name:'Томмази', c:'Италия', d:{2001:18}, cl:{2001:'Рома'}},
+    {name:'Хююпия', c:'Финляндия', d:{2001:18}, cl:{2001:'Ливерпуль'}},
+    {name:'Олисадебе', c:'Нигерия', d:{2001:18}, cl:{2001:'Панатинаикос'}},
+    {name:'Санд', c:'Дания', d:{2001:18}, cl:{2001:'Шальке-04'}},
+    {name:'Джеррард', c:'Англия', d:{2001:25,2004:22,2005:3,2006:31,2007:13,2008:10,2009:10},
+     cl:{2001:'Ливерпуль',2004:'Ливерпуль',2005:'Ливерпуль',2006:'Ливерпуль',2007:'Ливерпуль',2008:'Ливерпуль',2009:'Ливерпуль'}},
+    {name:'Баджо', c:'Италия', d:{2001:25}, cl:{2001:'Брешиа'}},
+    {name:'Буффон', c:'Италия', d:{2001:31,2003:9,2004:17,2005:19,2006:2,2007:18,2008:18,2010:18,2012:16,2016:9,2017:4},
+     cl:{2001:'Парма / Ювентус',2003:'Ювентус',2004:'Ювентус',2005:'Ювентус',2006:'Ювентус',2007:'Ювентус',2008:'Ювентус',2010:'Ювентус',2012:'Ювентус',2016:'Ювентус',2017:'Ювентус'}},
+    {name:'Кафу', c:'Бразилия', d:{2001:31,2002:15},
+     cl:{2001:'Рома',2002:'Рома'}},
+    {name:'Кандела', c:'Франция', d:{2001:31}, cl:{2001:'Рома'}},
+    {name:'Каррьер', c:'Франция', d:{2001:31}, cl:{2001:'Нант / Лион'}},
+    {name:'Дель Пьеро', c:'Италия', d:{2001:31,2002:10,2003:13},
+     cl:{2000:'Ювентус',2001:'Ювентус',2002:'Ювентус',2003:'Ювентус'}},
+    {name:'Десайи', c:'Франция', d:{2000:24,2001:31},
+     cl:{2000:'Челси',2001:'Челси'}},
+    {name:'Фердинанд', c:'Англия', d:{2001:31,2002:21},
+     cl:{2001:'Лидс Юнайтед',2002:'Лидс Юнайтед / Манчестер Юнайтед'}},
+    {name:'Хассельбайнк', c:'Нидерланды', d:{2001:31}, cl:{2001:'Челси'}},
+    {name:'Эльгера', c:'Испания', d:{2001:31}, cl:{2001:'Реал Мадрид'}},
+    {name:'Кьюэлл', c:'Австралия', d:{2001:31}, cl:{2001:'Лидс Юнайтед'}},
+    {name:'Куффур', c:'Гана', d:{2001:31}, cl:{2001:'Бавария'}},
+    {name:'Наката', c:'Япония', d:{2001:31}, cl:{2001:'Рома / Парма'}},
+    {name:'Паулета', c:'Португалия', d:{2001:31,2002:31,2003:31},
+     cl:{2001:'Бордо',2002:'Бордо',2003:'Бордо / ПСЖ'}},
+    {name:'Пирес', c:'Франция', d:{2001:31,2003:31},
+     cl:{2001:'Арсенал',2003:'Арсенал'}},
+    {name:'Тюрам', c:'Франция', d:{2001:31,2003:31,2005:31,2006:31},
+     cl:{2001:'Парма / Ювентус',2003:'Ювентус',2005:'Ювентус',2006:'Ювентус / Барселона'}},
+    {name:'Касильяс', c:'Испания', d:{2002:31,2003:31,2007:27,2008:4,2009:16,2010:7,2011:9,2012:6},
+     cl:{2002:'Реал Мадрид',2003:'Реал Мадрид',2007:'Реал Мадрид',2008:'Реал Мадрид',2009:'Реал Мадрид',2010:'Реал Мадрид',2011:'Реал Мадрид',2012:'Реал Мадрид'}},
+    // 2002
+    {name:'Роналдо', c:'Бразилия', d:{2002:1,2003:11,2004:31,2005:31},
+     cl:{2002:'Интернационале / Реал Мадрид',2003:'Реал Мадрид',2004:'Реал Мадрид',2005:'Реал Мадрид'}},
+    {name:'Баллак', c:'Германия', d:{2002:5,2003:20,2005:14,2006:31,2008:19},
+     cl:{2002:'Бавария',2003:'Бавария',2005:'Бавария',2006:'Челси',2008:'Челси'}},
+    {name:'Роналдиньо', c:'Бразилия', d:{2002:12,2003:22,2004:3,2005:1,2006:4,2007:12},
+     cl:{2002:'ПСЖ',2003:'ПСЖ / Барселона',2004:'Барселона',2005:'Барселона',2006:'Барселона',2007:'Барселона'}},
+    {name:'ван Нистелрой', c:'Нидерланды', d:{2002:13,2003:6,2004:9,2005:31,2007:6,2008:24},
+     cl:{2002:'Манчестер Юнайтед',2003:'Манчестер Юнайтед',2004:'Манчестер Юнайтед',2005:'Манчестер Юнайтед',2007:'Реал Мадрид',2008:'Реал Мадрид'}},
+    {name:'Баштюрк', c:'Турция', d:{2002:9}, cl:{2002:'Байер-04'}},
+    {name:'Шаш', c:'Турция', d:{2002:11}, cl:{2002:'Галатасарай'}},
+    {name:'Шнайдер', c:'Германия', d:{2002:15}, cl:{2002:'Байер-04'}},
+    {name:'Валерон', c:'Испания', d:{2002:15}, cl:{2002:'Депортиво'}},
+    {name:'Лусио', c:'Бразилия', d:{2002:19}, cl:{2002:'Байер-04'}},
+    {name:'Диоп', c:'Сенегал', d:{2002:21}, cl:{2002:'Грассхоппер / Ланс'}},
+    {name:'Диуф', c:'Сенегал', d:{2002:21}, cl:{2002:'Ланс / Ливерпуль'}},
+    {name:'Бараха', c:'Испания', d:{2002:24,2004:24},
+     cl:{2002:'Валенсия',2004:'Валенсия'}},
+    {name:'Аймар', c:'Аргентина', d:{2002:31,2003:31},
+     cl:{2000:'Валенсия',2002:'Валенсия',2003:'Валенсия'}},
+    {name:'Сиссе', c:'Франция', d:{2002:31,2004:31},
+     cl:{2002:'Осер',2004:'Ливерпуль'}},
+    {name:'Эдмилсон', c:'Бразилия', d:{2002:31}, cl:{2002:'Лион'}},
+    {name:'Инамото', c:'Япония', d:{2002:31}, cl:{2002:'Фулхэм'}},
+    {name:'Клозе', c:'Германия', d:{2002:31,2006:7,2007:31,2010:21},
+     cl:{2002:'Кайзерслаутерн',2006:'Вердер',2007:'Вердер / Бавария',2010:'Бавария'}},
+    {name:'Луис Энрике', c:'Испания', d:{2002:31}, cl:{2002:'Барселона'}},
+    {name:'Макелеле', c:'Франция', d:{2002:31,2003:31,2005:13,2006:31},
+     cl:{2002:'Реал Мадрид',2003:'Реал Мадрид / Челси',2005:'Челси',2006:'Челси'}},
+    {name:'Росицки', c:'Чехия', d:{2002:31}, cl:{2002:'Боруссия Д'}},
+    {name:'Савиола', c:'Аргентина', d:{2002:31}, cl:{2002:'Барселона'}},
+    {name:'Соль Ги Хён', c:'Республика Корея', d:{2002:31}, cl:{2002:'Андерлехт'}},
+    {name:'Томассон', c:'Дания', d:{2002:31}, cl:{2002:'Фейеноорд / Милан'}},
+    {name:'ван Хойдонк', c:'Нидерланды', d:{2002:31}, cl:{2002:'Фейеноорд'}},
+    {name:'Вильмотс', c:'Бельгия', d:{2002:31}, cl:{2002:'Бордо'}},
+    // 2003
+    {name:'Кахведжи', c:'Турция', d:{2003:18}, cl:{2003:'Реал Сосьедад'}},
+    {name:'Ибрагимович', c:'Швеция', d:{2003:20,2004:14,2005:8,2007:7,2008:9,2009:7,2012:10,2013:4,2014:13,2015:11,2016:13},
+     cl:{2003:'Аякс',2004:'Аякс / Ювентус',2005:'Ювентус',2007:'Интернационале',2008:'Интернационале',2009:'Интернационале / Барселона',2012:'ПСЖ',2013:'ПСЖ',2014:'ПСЖ',2015:'ПСЖ',2016:'Манчестер Юнайтед'}},
+    {name:'Коллер', c:'Чехия', d:{2003:22}, cl:{2003:'Боруссия Д'}},
+    {name:'Муту', c:'Румыния', d:{2003:22}, cl:{2003:'Парма / Челси'}},
+    {name:'Дида', c:'Бразилия', d:{2003:13,2005:31},
+     cl:{2003:'Милан',2005:'Милан'}},
+    {name:'Маккай', c:'Нидерланды', d:{2002:24,2003:13,2005:31},
+     cl:{2002:'Депортиво',2003:'Бавария',2005:'Бавария'}},
+    {name:'Деку', c:'Португалия', d:{2003:13,2004:2,2005:31,2006:11,2007:31},
+     cl:{2003:'Порту',2004:'Порту / Барселона',2005:'Барселона',2006:'Барселона',2007:'Барселона'}},
+    {name:'Кэмпбелл', c:'Англия', d:{2003:31}, cl:{2003:'Арсенал'}},
+    {name:'Киву', c:'Румыния', d:{2003:31}, cl:{2003:'Аякс / Рома'}},
+    {name:'Ковачевич', c:'Сербия', d:{2003:31}, cl:{2003:'Реал Сосьедад'}},
+    {name:'Сальгадо', c:'Испания', d:{2003:31}, cl:{2003:'Реал Мадрид'}},
+    {name:'Трабельси', c:'Тунис', d:{2003:31}, cl:{2003:'Аякс'}},
+{name:'Вьери', c:'Италия', d:{2002:31,2003:31}, cl:{2002:'Интернационале',2003:'Интернационале'}},
+    {name:'Дзамбротта', c:'Италия', d:{2003:31,2006:20},
+     cl:{2003:'Ювентус',2006:'Ювентус / Барселона'}},
+    {name:'Жюли', c:'Франция', d:{2003:31,2004:24,2006:31},
+     cl:{2003:'Монако',2004:'Монако / Барселона',2006:'Барселона'}},
+    {name:'Это\'О', c:'Камерун', d:{2003:31,2004:15,2005:10,2006:6,2007:30,2008:17,2009:5,2010:12,2011:8},
+     cl:{2003:'Мальорка',2004:'Мальорка / Барселона',2005:'Барселона',2006:'Барселона',2007:'Барселона',2008:'Барселона',2009:'Барселона / Интернационале',2010:'Интернационале',2011:'Анжи'}},
+    // 2004
+    {name:'Роналду', c:'Португалия',
+    d:{2004:12,2005:20,2006:14,2007:2,2008:1,2009:2,2010:6,2011:2,2012:2,2013:1,2014:1,2015:2,2016:1,2017:1,2018:2,2019:3,2021:6,2022:31},
+    cl:{2004:'Манчестер Юнайтед',2005:'Манчестер Юнайтед',2006:'Манчестер Юнайтед',2007:'Манчестер Юнайтед',2008:'Манчестер Юнайтед',
+         2009:'Реал Мадрид',2010:'Реал Мадрид',2011:'Реал Мадрид',2012:'Реал Мадрид',2013:'Реал Мадрид',2014:'Реал Мадрид',
+         2015:'Реал Мадрид',2016:'Реал Мадрид',2017:'Реал Мадрид',2018:'Реал Мадрид / Ювентус',
+         2019:'Ювентус',2021:'Ювентус / Манчестер Юнайтед',2022:'Манчестер Юнайтед'}},
+    {name:'Руни', c:'Англия', d:{2004:8,2005:31,2006:31,2007:26,2008:13,2009:8,2011:5,2012:15},
+    cl:{2004:'Эвертон / Манчестер Юнайтед',2005:'Манчестер Юнайтед',2006:'Манчестер Юнайтед',2007:'Манчестер Юнайтед',2008:'Манчестер Юнайтед',2009:'Манчестер Юнайтед',2011:'Манчестер Юнайтед',2012:'Манчестер Юнайтед'}},
+    {name:'Загоракис', c:'Греция', d:{2004:5}, cl:{2004:'Болонья'}},
+    {name:'Адриано', c:'Бразилия', d:{2004:6,2005:7},
+     cl:{2004:'Интернационале',2005:'Интернационале'}},
+    {name:'Карвалью', c:'Португалия', d:{2004:9}, cl:{2004:'Челси'}},
+    {name:'Харистеас', c:'Греция', d:{2004:11}, cl:{2004:'Вердер'}},
+    {name:'Барош', c:'Чехия', d:{2004:12}, cl:{2004:'Ливерпуль'}},
+    {name:'Кака', c:'Бразилия', d:{2004:15,2005:9,2006:11,2007:1,2008:8,2009:6},
+     cl:{2004:'Милан',2005:'Милан',2006:'Милан',2007:'Милан',2008:'Милан',2009:'Реал Мадрид'}},
+    {name:'Делас', c:'Греция', d:{2004:17}, cl:{2004:'Рома'}},
+    {name:'Морьентес', c:'Испания', d:{2004:17}, cl:{2004:'Реал Мадрид'}},
+    {name:'Лэмпард', c:'Англия', d:{2004:17,2005:2,2006:17,2008:15,2009:21},
+     cl:{2004:'Челси',2005:'Челси',2006:'Челси',2008:'Челси',2009:'Челси'}},
+    {name:'Дрогба', c:'Кот-д\'Ивуар', d:{2004:17,2005:14,2006:8,2007:4,2008:21,2009:9,2010:9,2012:8},
+     cl:{2004:'Челси',2005:'Челси',2006:'Челси',2007:'Челси',2008:'Челси',2009:'Челси',2010:'Челси',2012:'Челси'}},
+    {name:'Никополидис', c:'Греция', d:{2004:24}, cl:{2004:'Панатинаикос / Олимпиакос'}},
+    {name:'Манише', c:'Португалия', d:{2004:24}, cl:{2004:'Порту'}},
+    {name:'Висенте', c:'Испания', d:{2004:28}, cl:{2004:'Валенсия'}},
+    {name:'Аилтон', c:'Бразилия', d:{2004:31}, cl:{2004:'Шальке-04'}},
+    {name:'Айяла', c:'Аргентина', d:{2004:31}, cl:{2004:'Валенсия'}},
+    {name:'Капсис', c:'Греция', d:{2004:31}, cl:{2004:'Бордо'}},
+    {name:'Мику', c:'Франция', d:{2004:31}, cl:{2004:'Вердер'}},
+    {name:'Миста', c:'Испания', d:{2004:31}, cl:{2004:'Валенсия'}},
+    {name:'Пирло', c:'Италия', d:{2004:31,2005:31,2006:9,2007:5,2012:7,2013:9},
+     cl:{2004:'Милан',2005:'Милан',2006:'Милан',2007:'Милан',2012:'Ювентус',2013:'Ювентус'}},
+    {name:'Рейес', c:'Испания', d:{2004:31},
+     cl:{2004:'Арсенал'}},
+    {name:'Зеедорф', c:'Нидерланды', d:{2004:31,2007:18},
+     cl:{2004:'Милан',2007:'Милан'}},
+    {name:'Сейтаридис', c:'Греция', d:{2004:31}, cl:{2004:'Порту'}},
+    // 2005
+    {name:'Терри', c:'Англия', d:{2005:10,2006:20,2009:26},
+     cl:{2005:'Челси',2006:'Челси',2009:'Челси'}},
+    {name:'Жуниньо', c:'Бразилия', d:{2004:31,2005:12,2006:20},
+     cl:{2004:'Лион',2005:'Лион',2006:'Лион'}},
+    {name:'Рикельме', c:'Аргентина', d:{2005:14,2006:31,2007:14},
+     cl:{2005:'Вильярреал',2006:'Вильярреал',2007:'Вильярреал / Бока Хуниорс'}},
+    {name:'Чех', c:'Чехия', d:{2004:31,2005:14,2007:18},
+     cl:{2004:'Челси',2005:'Челси',2007:'Челси'}},
+    {name:'Каррагер', c:'Англия', d:{2005:20}, cl:{2005:'Ливерпуль'}},
+    {name:'Эссьен', c:'Гана', d:{2005:22,2006:31,2007:24},
+     cl:{2005:'Челси',2006:'Челси',2007:'Челси'}},
+    {name:'Луис Гарсия', c:'Испания', d:{2005:23}, cl:{2005:'Ливерпуль'}},
+    {name:'Каморанези', c:'Италия', d:{2005:31}, cl:{2005:'Ювентус'}},
+    {name:'Каннаваро', c:'Италия', d:{2005:31,2006:1,2007:24},
+     cl:{2005:'Ювентус',2006:'Ювентус / Реал Мадрид',2007:'Реал Мадрид'}},
+    {name:'Купе', c:'Франция', d:{2005:31,2006:31},
+     cl:{2005:'Лион',2006:'Лион'}},
+    {name:'Крис', c:'Бразилия', d:{2005:31,2006:31},
+     cl:{2005:'Лион',2006:'Лион'}},
+    {name:'Эмерсон', c:'Бразилия', d:{2004:31,2005:31},
+     cl:{2004:'Ювентус',2005:'Ювентус'}},
+    {name:'Форлан', c:'Уругвай', d:{2005:31,2009:19,2010:5,2011:7},
+     cl:{2005:'Вильярреал',2009:'Атлетико Мадрид',2010:'Атлетико Мадрид',2011:'Атлетико Мадрид / Интернационале'}},
+    {name:'Пак Чи Сон', c:'Республика Корея', d:{2005:31}, cl:{2005:'Манчестер Юнайтед'}},
+    {name:'Роббен', c:'Нидерланды', d:{2005:31,2006:31,2010:14,2013:8,2014:4,2015:22},
+     cl:{2005:'Челси',2006:'Челси',2010:'Бавария',2013:'Бавария',2014:'Бавария',2015:'Бавария'}},
+    {name:'Робиньо', c:'Бразилия', d:{2005:31,2007:9},
+     cl:{2005:'Реал Мадрид',2007:'Реал Мадрид'}},
+    {name:'ван Боммел', c:'Нидерланды', d:{2005:31}, cl:{2005:'Барселона'}},
+    {name:'Хави', c:'Испания', d:{2005:31,2008:5,2009:3,2010:3,2011:3,2012:4,2013:14},
+     cl:{2005:'Барселона',2008:'Барселона',2009:'Барселона',2010:'Барселона',2011:'Барселона',2012:'Барселона',2013:'Барселона'}},
+    // 2006
+    {name:'Леманн', c:'Германия', d:{2006:10}, cl:{2006:'Арсенал'}},
+    {name:'Рибери', c:'Франция', d:{2006:13,2007:17,2008:16,2009:28,2013:3},
+     cl:{2006:'Марсель',2007:'Бавария',2008:'Бавария',2009:'Бавария',2013:'Бавария'}},
+    {name:'Гаттузо', c:'Италия', d:{2006:14,2007:18},
+     cl:{2006:'Милан',2007:'Милан'}},
+    {name:'Подольски', c:'Германия', d:{2006:17}, cl:{2006:'Бавария'}},
+    {name:'Пуйоль', c:'Испания', d:{2006:17,2010:11},
+     cl:{2006:'Барселона',2010:'Барселона'}},
+    {name:'Месси', c:'Аргентина', d:{2006:20,2007:3,2008:2,2009:1,2010:1,2011:1,2012:1,2013:2,2014:2,2015:1,2016:2,2017:2,2018:5,2019:1,2021:1,2023:1,2026:5},
+     cl:{2006:'Барселона',2007:'Барселона',2008:'Барселона',2009:'Барселона',2010:'Барселона',2011:'Барселона',2012:'Барселона',2013:'Барселона',2014:'Барселона',2015:'Барселона',2016:'Барселона',2017:'Барселона',2018:'Барселона',2019:'Барселона',2021:'Барселона / ПСЖ',2023:'ПСЖ / Интер Майами',2026:'Интер Майами'}},
+    {name:'Тони', c:'Италия', d:{2006:20,2007:31,2008:31},
+     cl:{2006:'Фиорентина',2007:'Бавария',2008:'Бавария'}},
+    {name:'Вилья', c:'Испания', d:{2006:25,2007:31,2008:7,2009:26,2010:8,2011:14},
+     cl:{2006:'Валенсия',2007:'Валенсия',2008:'Валенсия',2009:'Валенсия',2010:'Барселона',2011:'Барселона'}},
+    {name:'Кэхилл', c:'Австралия', d:{2006:31}, cl:{2006:'Эвертон'}},
+    {name:'Джо Коул', c:'Англия', d:{2006:31}, cl:{2006:'Челси'}},
+    {name:'Диарра', c:'Мали', d:{2006:31,2007:31},
+     cl:{2006:'Лион / Реал Мадрид',2007:'Реал Мадрид'}},
+    {name:'Фабрегас', c:'Испания', d:{2006:31,2007:8,2008:19,2009:12,2010:20,2011:21},
+     cl:{2006:'Арсенал',2007:'Арсенал',2008:'Арсенал',2009:'Арсенал',2010:'Арсенал',2011:'Барселона'}},
+    {name:'Галлас', c:'Франция', d:{2006:31}, cl:{2006:'Арсенал'}},
+    {name:'Гроссо', c:'Италия', d:{2006:31}, cl:{2006:'Интернационале'}},
+    {name:'Мендес', c:'Эквадор', d:{2006:31}, cl:{2006:'ПСВ'}},
+    {name:'Малуда', c:'Франция', d:{2006:31,2007:31},
+     cl:{2006:'Лион',2007:'Лион / Челси'}},
+    {name:'Саньоль', c:'Франция', d:{2006:31}, cl:{2006:'Бавария'}},
+    {name:'Швайнштайгер', c:'Германия', d:{2006:31,2010:16,2011:15,2013:17,2014:18},
+     cl:{2006:'Бавария',2010:'Бавария',2011:'Бавария',2013:'Бавария',2014:'Бавария'}},
+    {name:'Тьягу Мендиш', c:'Португалия', d:{2006:31}, cl:{2006:'Лион'}},
+    {name:'Торрес', c:'Испания', d:{2006:31,2007:31,2008:3,2009:11},
+     cl:{2006:'Атлетико Мадрид',2007:'Атлетико Мадрид / Ливерпуль',2008:'Ливерпуль',2009:'Ливерпуль'}},
+    // 2007
+    {name:'Кануте', c:'Мали', d:{2007:11}, cl:{2007:'Севилья'}},
+    {name:'Алвес', c:'Бразилия', d:{2007:15,2010:23,2011:19},
+     cl:{2007:'Севилья',2010:'Барселона',2011:'Барселона'}},
+    {name:'Аршавин', c:'Россия', d:{2008:6,2009:21},
+     cl:{2008:'Зенит',2009:'Арсенал'}},
+    {name:'Сенна', c:'Испания', d:{2008:11}, cl:{2008:'Вильярреал'}},
+    {name:'Адебайор', c:'Того', d:{2008:12}, cl:{2008:'Арсенал'}},
+    {name:'Джеко', c:'Босния и Герцеговина', d:{2009:13,2017:28},
+     cl:{2009:'Вольфсбург',2017:'Рома'}},
+    {name:'Фабиано', c:'Бразилия', d:{2009:16}, cl:{2009:'Севилья'}},
+    {name:'Видич', c:'Сербия', d:{2008:21,2009:16},
+     cl:{2008:'Манчестер Юнайтед',2009:'Манчестер Юнайтед'}},
+    {name:'Гуркюфф', c:'Франция', d:{2009:20}, cl:{2009:'Бордо'}},
+    {name:'Очоа', c:'Мексика', d:{2007:31}, cl:{2007:'Америка'}},
+    {name:'Абидаль', c:'Франция', d:{2007:31,2011:18},
+     cl:{2007:'Лион / Барселона',2011:'Барселона'}},
+    {name:'Накамура', c:'Япония', d:{2007:31}, cl:{2007:'Селтик'}},
+    {name:'Куарежма', c:'Португалия', d:{2007:31}, cl:{2007:'Порту'}},
+    {name:'Коло Туре', c:'Кот-д\'Ивуар', d:{2007:31}, cl:{2007:'Арсенал'}},
+    {name:'Юнис Махмуд', c:'Ирак', d:{2007:29}, cl:{2007:'Аль-Гафара'}},
+    {name:'Бербатов', c:'Болгария', d:{2007:30}, cl:{2007:'Тоттенхэм'}},
+    {name:'Тевес', c:'Аргентина', d:{2007:30}, cl:{2007:'Манчестер Юнайтед'}},
+    {name:'Рожерио Сени', c:'Бразилия', d:{2007:27}, cl:{2007:'Сан-Паулу'}},
+    {name:'Диего', c:'Бразилия', d:{2007:31,2009:25},
+     cl:{2007:'Вердер',2009:'Ювентус'}},
+    // 2008
+    {name:'ван дер Варт', c:'Нидерланды', d:{2008:31}, cl:{2008:'Гамбург / Реал Мадрид'}},
+    {name:'ван дер Сар', c:'Нидерланды', d:{2008:24}, cl:{2008:'Манчестер Юнайтед'}},
+    {name:'Жирков', c:'Россия', d:{2008:31}, cl:{2008:'ЦСКА'}},
+    {name:'Пепе', c:'Португалия', d:{2008:31,2016:9},
+     cl:{2008:'Реал Мадрид',2016:'Реал Мадрид'}},
+    {name:'Бензема', c:'Франция', d:{2008:31,2009:31,2011:20,2012:22,2014:16,2015:20,2017:25,2018:17,2019:26,2021:4,2022:1,2023:16},
+     cl:{2008:'Лион',2009:'Лион / Реал Мадрид',2011:'Реал Мадрид',2012:'Реал Мадрид',2014:'Реал Мадрид',2015:'Реал Мадрид',2017:'Реал Мадрид',2018:'Реал Мадрид',2019:'Реал Мадрид',2021:'Реал Мадрид',2022:'Реал Мадрид',2023:'Реал Мадрид / Аль-Иттихад'}},
+    {name:'Агуэро', c:'Аргентина', d:{2008:14,2011:17,2012:17,2015:13,2016:31,2018:16,2019:16},
+     cl:{2008:'Атлетико Мадрид',2011:'Атлетико Мадрид / Манчестер Сити',2012:'Манчестер Сити',2015:'Манчестер Сити',2016:'Манчестер Сити',2018:'Манчестер Сити',2019:'Манчестер Сити'}},
+    {name:'Иньеста', c:'Испания', d:{2009:4,2010:2,2011:4,2012:3,2013:6,2014:17,2015:9,2016:31},
+     cl:{2009:'Барселона',2010:'Барселона',2011:'Барселона',2012:'Барселона',2013:'Барселона',2014:'Барселона',2015:'Барселона',2016:'Барселона'}},
+    // 2009
+    {name:'Жулио Сезар', c:'Бразилия', d:{2009:21,2010:19},
+     cl:{2009:'Интернационале',2010:'Интернационале'}},
+    // 2010+
+    {name:'Снейдер', c:'Нидерланды', d:{2010:4,2011:12},
+     cl:{2010:'Интернационале',2011:'Интернационале'}},
+    {name:'Алонсо', c:'Испания', d:{2010:10,2011:16,2012:11},
+     cl:{2010:'Реал Мадрид',2011:'Реал Мадрид',2012:'Реал Мадрид'}},
+    {name:'Озил', c:'Германия', d:{2010:13,2011:11,2012:14,2013:16},
+     cl:{2010:'Реал Мадрид',2011:'Реал Мадрид',2012:'Реал Мадрид',2013:'Реал Мадрид / Арсенал'}},
+    {name:'Мюллер', c:'Германия', d:{2010:15,2011:13,2013:19,2014:5,2015:6,2016:31},
+     cl:{2010:'Бавария',2011:'Бавария',2013:'Бавария',2014:'Бавария',2015:'Бавария',2016:'Бавария'}},
+    {name:'Майкон', c:'Бразилия', d:{2009:24,2010:17},
+     cl:{2009:'Интернационале',2010:'Интернационале'}},
+    {name:'Гьян', c:'Гана', d:{2010:18}, cl:{2010:'Сандерленд'}},
+    {name:'Нани', c:'Португалия', d:{2011:22}, cl:{2011:'Манчестер Юнайтед'}},
+    {name:'Пике', c:'Испания', d:{2011:23,2012:21},
+     cl:{2011:'Барселона',2012:'Барселона'}},
+    {name:'Бускетс', c:'Испания', d:{2012:20}, cl:{2012:'Барселона'}},
+    {name:'Балотелли', c:'Италия', d:{2012:23}, cl:{2012:'Манчестер Сити'}},
+    {name:'Тиагу Силва', c:'Бразилия', d:{2013:21}, cl:{2013:'ПСЖ'}},
+    {name:'Неймар', c:'Бразилия', d:{2011:10,2012:13,2013:5,2014:7,2015:3,2016:5,2017:3,2018:12,2021:16},
+     cl:{2011:'Сантос',2012:'Сантос',2013:'Сантос / Барселона',2014:'Барселона',2015:'Барселона',2016:'Барселона',2017:'Барселона / ПСЖ',2018:'ПСЖ',2021:'ПСЖ'}},
+    {name:'Суарес', c:'Уругвай', d:{2011:6,2013:18,2015:5,2016:4,2017:13,2018:13,2021:17},
+     cl:{2011:'Ливерпуль',2013:'Ливерпуль',2015:'Барселона',2016:'Барселона',2017:'Барселона',2018:'Барселона',2021:'Атлетико Мадрид'}},
+    {name:'Левандовски', c:'Польша', d:{2013:13,2015:4,2016:16,2017:9,2019:8,2021:2,2022:4,2023:12,2025:17},
+     cl:{2013:'Боруссия Д',2015:'Бавария',2016:'Бавария',2017:'Бавария',2019:'Бавария',2021:'Бавария',2022:'Бавария / Барселона',2023:'Барселона',2025:'Барселона'}},
+    {name:'Мбаппе', c:'Франция', d:{2017:7,2018:4,2019:6,2021:9,2022:6,2023:3,2024:6,2025:7,2026:2},
+     cl:{2017:'ПСЖ',2018:'ПСЖ',2019:'ПСЖ',2021:'ПСЖ',2022:'ПСЖ',2023:'ПСЖ',2024:'ПСЖ / Реал Мадрид',2025:'Реал Мадрид',2026:'Реал Мадрид'}},
+    {name:'Салах', c:'Египет', d:{2018:6,2019:5,2021:7,2022:5,2023:11,2025:4},
+     cl:{2018:'Ливерпуль',2019:'Ливерпуль',2021:'Ливерпуль',2022:'Ливерпуль',2023:'Ливерпуль',2025:'Ливерпуль'}},
+    {name:'Гризманн', c:'Франция', d:{2016:3,2017:18,2018:3,2019:18,2023:19},
+     cl:{2016:'Атлетико Мадрид',2017:'Атлетико Мадрид',2018:'Атлетико Мадрид',2019:'Атлетико Мадрид / Барселона',2023:'Атлетико Мадрид'}},
+    {name:'Де Брюйне', c:'Бельгия', d:{2015:18,2016:31,2017:14,2018:9,2019:14,2021:8,2022:3,2023:4},
+     cl:{2015:'Манчестер Сити',2016:'Манчестер Сити',2017:'Манчестер Сити',2018:'Манчестер Сити',2019:'Манчестер Сити',2021:'Манчестер Сити',2022:'Манчестер Сити',2023:'Манчестер Сити'}},
+    {name:'Родри', c:'Испания', d:{2023:5,2024:1,2026:4},
+     cl:{2023:'Манчестер Сити',2024:'Манчестер Сити',2026:'Манчестер Сити / Барселона'}},
+    {name:'Холанд', c:'Норвегия', d:{2021:11,2022:10,2023:2,2024:5,2025:26,2026:8},
+     cl:{2021:'Боруссия Д',2022:'Боруссия Д / Манчестер Сити',2023:'Манчестер Сити',2024:'Манчестер Сити',2025:'Манчестер Сити',2026:'Манчестер Сити'}},
+    {name:'Ямаль', c:'Испания', d:{2024:8,2025:2,2026:3},
+     cl:{2024:'Барселона',2025:'Барселона',2026:'Барселона'}},
+    {name:'Мане', c:'Сенегал', d:{2017:23,2018:22,2019:4,2022:2,2026:29},
+     cl:{2017:'Ливерпуль',2018:'Ливерпуль',2019:'Ливерпуль',2022:'Ливерпуль / Бавария',2026:'Аль-Наср'}},
+    {name:'Фалькао', c:'Колумбия', d:{2012:5,2013:11,2017:24},
+     cl:{2012:'Атлетико Мадрид',2013:'Атлетико Мадрид / Монако',2017:'Монако'}},
+    {name:'ван Перси', c:'Нидерланды', d:{2007:30,2012:9,2013:7},
+     cl:{2007:'Арсенал',2012:'Манчестер Юнайтед',2013:'Манчестер Юнайтед'}},
+    {name:'Туре', c:'Кот-д\'Ивуар', d:{2009:28,2012:12,2013:12,2014:14,2015:12},
+     cl:{2009:'Барселона',2012:'Манчестер Сити',2013:'Манчестер Сити',2014:'Манчестер Сити',2015:'Манчестер Сити'}},
+    {name:'Бэйл', c:'Уэльс', d:{2013:10,2014:12,2015:16,2016:6,2018:17},
+     cl:{2013:'Тоттенхэм / Реал Мадрид',2014:'Реал Мадрид',2015:'Реал Мадрид',2016:'Реал Мадрид',2018:'Реал Мадрид'}},
+    {name:'Лам', c:'Германия', d:{2006:25,2010:22,2013:14,2014:6},
+     cl:{2006:'Бавария',2010:'Бавария',2013:'Бавария',2014:'Бавария'}},
+    {name:'Нойер', c:'Германия', d:{2012:19,2013:23,2014:3,2015:7,2016:31},
+     cl:{2012:'Бавария',2013:'Бавария',2014:'Бавария',2015:'Бавария',2016:'Бавария'}},
+    {name:'Хамес Родригес', c:'Колумбия', d:{2014:8,2015:19},
+     cl:{2014:'Монако / Реал Мадрид',2015:'Реал Мадрид'}},
+    {name:'Кроос', c:'Германия', d:{2014:9,2015:21,2016:17,2017:17,2024:9},
+     cl:{2014:'Бавария',2015:'Бавария / Реал Мадрид',2016:'Реал Мадрид',2017:'Реал Мадрид',2024:'Реал Мадрид'}},
+    {name:'Ди Мария', c:'Аргентина', d:{2014:10}, cl:{2014:'Реал Мадрид / Манчестер Юнайтед'}},
+    {name:'Коста', c:'Испания', d:{2014:11}, cl:{2014:'Атлетико Мадрид / Челси'}},
+    {name:'Гётце', c:'Германия', d:{2014:15}, cl:{2014:'Боруссия Д / Бавария'}},
+    {name:'Маскерано', c:'Аргентина', d:{2014:19,2015:14},
+     cl:{2014:'Барселона',2015:'Барселона'}},
+    {name:'Куртуа', c:'Бельгия', d:{2014:20,2018:14,2022:7},
+     cl:{2014:'Челси',2018:'Челси / Реал Мадрид',2022:'Реал Мадрид'}},
+    {name:'Азар', c:'Бельгия', d:{2013:22,2014:21,2015:8,2017:19,2018:8,2019:13},
+     cl:{2013:'Челси',2014:'Челси',2015:'Челси',2017:'Челси',2018:'Челси',2019:'Реал Мадрид'}},
+    {name:'Погба', c:'Франция', d:{2014:22,2015:15,2016:14,2018:15},
+     cl:{2014:'Ювентус',2015:'Ювентус',2016:'Ювентус / Манчестер Юнайтед',2018:'Манчестер Юнайтед'}},
+    {name:'Рамос', c:'Испания', d:{2008:21,2012:18,2014:23,2016:31,2017:6,2018:19},
+     cl:{2008:'Реал Мадрид',2012:'Реал Мадрид',2014:'Реал Мадрид',2016:'Реал Мадрид',2017:'Реал Мадрид',2018:'Реал Мадрид'}},
+    {name:'Санчес', c:'Чили', d:{2015:10}, cl:{2015:'Арсенал'}},
+    {name:'Видаль', c:'Чили', d:{2015:17,2016:14},
+     cl:{2015:'Ювентус / Бавария',2016:'Бавария'}},
+    {name:'Ракитич', c:'Хорватия', d:{2015:23,2018:19},
+     cl:{2015:'Барселона',2018:'Барселона'}},
+    {name:'Марез', c:'Алжир', d:{2016:7,2019:10,2021:20,2022:12},
+     cl:{2016:'Лестер',2019:'Манчестер Сити',2021:'Манчестер Сити',2022:'Манчестер Сити'}},
+    {name:'Варди', c:'Англия', d:{2016:8}, cl:{2016:'Лестер'}},
+    {name:'Обамеянг', c:'Габон', d:{2016:11,2017:21,2019:20},
+     cl:{2016:'Боруссия Д',2017:'Боруссия Д',2019:'Арсенал'}},
+    {name:'Патрисио', c:'Португалия', d:{2016:12}, cl:{2016:'Спортинг'}},
+    {name:'Модрич', c:'Хорватия', d:{2016:17,2017:5,2018:1,2021:31,2022:9,2023:10},
+     cl:{2016:'Реал Мадрид',2017:'Реал Мадрид',2018:'Реал Мадрид',2021:'Реал Мадрид',2022:'Реал Мадрид',2023:'Реал Мадрид'}},
+    {name:'Пайе', c:'Франция', d:{2016:17}, cl:{2016:'Вест Хэм'}},
+    {name:'Канте', c:'Франция', d:{2017:8,2018:11,2021:5},
+     cl:{2017:'Челси',2018:'Челси',2021:'Челси'}},
+    {name:'Кавани', c:'Уругвай', d:{2013:20,2017:11,2018:22},
+     cl:{2013:'ПСЖ',2017:'ПСЖ',2018:'ПСЖ'}},
+    {name:'Иско', c:'Испания', d:{2017:12,2018:31},
+     cl:{2017:'Реал Мадрид',2018:'Реал Мадрид'}},
+    {name:'Дибала', c:'Аргентина', d:{2016:31,2017:15},
+     cl:{2016:'Ювентус',2017:'Ювентус'}},
+    {name:'Марселу', c:'Бразилия', d:{2017:16,2018:22},
+     cl:{2017:'Реал Мадрид',2018:'Реал Мадрид'}},
+    {name:'Бонуччи', c:'Италия', d:{2017:21,2021:14},
+     cl:{2017:'Милан',2021:'Ювентус'}},
+    {name:'Облак', c:'Словения', d:{2017:26,2018:25},
+     cl:{2017:'Атлетико Мадрид',2018:'Атлетико Мадрид'}},
+    {name:'Хуммельс', c:'Германия', d:{2017:27,2024:31},
+     cl:{2017:'Бавария',2024:'Боруссия Д / Рома'}},
+    {name:'Мертенс', c:'Бельгия', d:{2017:31}, cl:{2017:'Наполи'}},
+    {name:'Коутиньо', c:'Бразилия', d:{2017:31}, cl:{2017:'Ливерпуль'}},
+    {name:'Кейн', c:'Англия', d:{2017:10,2018:10,2021:23,2022:31,2023:19,2024:10,2025:13,2026:1},
+     cl:{2017:'Тоттенхэм',2018:'Тоттенхэм',2021:'Тоттенхэм',2022:'Тоттенхэм',2023:'Тоттенхэм / Бавария',2024:'Бавария',2025:'Бавария',2026:'Бавария'}},
+    {name:'ван Дейк', c:'Нидерланды', d:{2019:2,2022:16,2025:28},
+     cl:{2019:'Ливерпуль',2022:'Ливерпуль',2025:'Ливерпуль'}},
+    {name:'Фирмино', c:'Бразилия', d:{2018:19,2019:17},
+     cl:{2018:'Ливерпуль',2019:'Ливерпуль'}},
+    {name:'Жоржиньо', c:'Италия', d:{2021:3}, cl:{2021:'Челси'}},
+    {name:'Винисиус', c:'Бразилия', d:{2022:8,2023:6,2024:2,2025:16,2026:17},
+     cl:{2022:'Реал Мадрид',2023:'Реал Мадрид',2024:'Реал Мадрид',2025:'Реал Мадрид',2026:'Реал Мадрид'}},
+    {name:'Альварес', c:'Аргентина', d:{2023:7}, cl:{2023:'Манчестер Сити'}},
+    {name:'Осимхен', c:'Нигерия', d:{2023:8}, cl:{2023:'Наполи'}},
+    {name:'Бернарду Силва', c:'Португалия', d:{2019:9,2022:31,2023:9},
+     cl:{2019:'Манчестер Сити',2022:'Манчестер Сити',2023:'Манчестер Сити'}},
+    {name:'Беллингем', c:'Англия', d:{2023:18,2024:3,2025:23,2026:11},
+     cl:{2023:'Боруссия Д / Реал Мадрид',2024:'Реал Мадрид',2025:'Реал Мадрид',2026:'Реал Мадрид'}},
+    {name:'Карвахаль', c:'Испания', d:{2024:4}, cl:{2024:'Реал Мадрид'}},
+    {name:'Дембеле', c:'Франция', d:{2025:1,2026:7},
+     cl:{2025:'ПСЖ',2026:'ПСЖ'}},
+    {name:'Витинья', c:'Португалия', d:{2024:27,2025:3,2026:14},
+     cl:{2024:'ПСЖ',2025:'ПСЖ',2026:'ПСЖ'}},
+    {name:'Рафинья', c:'Бразилия', d:{2025:5}, cl:{2025:'Барселона'}},
+    {name:'Хакими', c:'Марокко', d:{2025:6,2026:13},
+     cl:{2025:'ПСЖ',2026:'ПСЖ'}},
+    {name:'Палмер', c:'Англия', d:{2024:25,2025:8},
+     cl:{2024:'Челси',2025:'Челси'}},
+    {name:'Доннарумма', c:'Италия', d:{2021:10,2025:9},
+     cl:{2021:'Милан / ПСЖ',2025:'ПСЖ / Манчестер Сити'}},
+    {name:'Нуну Мендеш', c:'Португалия', d:{2025:10,2026:23},
+     cl:{2025:'ПСЖ',2026:'ПСЖ'}},
+    {name:'Педри', c:'Испания', d:{2021:24,2025:11},
+     cl:{2021:'Барселона',2025:'Барселона'}},
+    {name:'Кварацхелия', c:'Грузия', d:{2023:16,2025:12,2026:6},
+     cl:{2023:'Наполи',2025:'ПСЖ',2026:'ПСЖ'}},
+    {name:'Дуэ', c:'Франция', d:{2025:14}, cl:{2025:'ПСЖ'}},
+    {name:'Дьёкереш', c:'Швеция', d:{2025:15}, cl:{2025:'Спортинг / Арсенал'}},
+    {name:'Мактомини', c:'Шотландия', d:{2025:18}, cl:{2025:'Наполи'}},
+    {name:'Жоау Невеш', c:'Португалия', d:{2025:19,2026:19},
+     cl:{2025:'ПСЖ',2026:'ПСЖ'}},
+    {name:'Лаутаро Мартинес', c:'Аргентина', d:{2021:21,2023:19,2024:7,2025:20,2026:22},
+     cl:{2021:'Интернационале',2023:'Интернационале',2024:'Интернационале',2025:'Интернационале',2026:'Интернационале'}},
+    {name:'Олисе', c:'Франция', d:{2025:30,2026:9},
+     cl:{2025:'Бавария',2026:'Бавария'}},
+    {name:'Фабиан Руис', c:'Испания', d:{2025:24,2026:10},
+     cl:{2025:'ПСЖ',2026:'ПСЖ'}},
+    {name:'Кубарси', c:'Испания', d:{2026:12}, cl:{2026:'Барселона'}},
+    {name:'Райс', c:'Англия', d:{2024:26,2025:27,2026:15},
+     cl:{2024:'Арсенал',2025:'Арсенал',2026:'Арсенал'}},
+    {name:'Ферран Торрес', c:'Испания', d:{2026:16}, cl:{2026:'Барселона / ПСЖ'}},
+    {name:'Кукурелья', c:'Испания', d:{2026:18}, cl:{2026:'Челси / Реал Мадрид'}},
+    {name:'Пачо', c:'Эквадор', d:{2026:20}, cl:{2026:'ПСЖ'}},
+    {name:'Габриэл', c:'Бразилия', d:{2026:21}, cl:{2026:'Арсенал'}},
+    {name:'Луис Диас', c:'Колумбия', d:{2022:17,2026:24},
+     cl:{2022:'Порту / Ливерпуль',2026:'Бавария'}},
+    {name:'Маркиньос', c:'Бразилия', d:{2019:31,2026:25},
+     cl:{2019:'ПСЖ',2026:'ПСЖ'}},
+    {name:'Упамекано', c:'Франция', d:{2026:26}, cl:{2026:'Бавария'}},
+    {name:'Бруну Фернандеш', c:'Португалия', d:{2021:21,2026:27},
+     cl:{2021:'Манчестер Юнайтед',2026:'Манчестер Юнайтед'}},
+    {name:'Киньонес', c:'Мексика', d:{2026:28}, cl:{2026:'Аль-Кадисия'}},
+    {name:'Салиба', c:'Франция', d:{2024:24,2026:29},
+     cl:{2024:'Арсенал',2026:'Арсенал'}},
+    {name:'Годин', c:'Уругвай', d:{2016:31,2018:28},
+     cl:{2016:'Атлетико Мадрид',2018:'Атлетико Мадрид'}},
+    {name:'Игуаин', c:'Аргентина', d:{2016:31}, cl:{2016:'Наполи / Ювентус'}},
+    {name:'Коке', c:'Испания', d:{2016:31}, cl:{2016:'Атлетико Мадрид'}},
+    {name:'Льорис', c:'Франция', d:{2016:31,2018:31,2019:23},
+     cl:{2016:'Тоттенхэм',2018:'Тоттенхэм',2019:'Тоттенхэм'}},
+    {name:'Де Хеа', c:'Испания', d:{2017:20}, cl:{2017:'Манчестер Юнайтед'}},
+    {name:'Варан', c:'Франция', d:{2018:7}, cl:{2018:'Реал Мадрид'}},
+    {name:'Алиссон', c:'Бразилия', d:{2018:25,2019:7},
+     cl:{2018:'Рома / Ливерпуль',2019:'Ливерпуль'}},
+    {name:'Манджукич', c:'Хорватия', d:{2018:25}, cl:{2018:'Ювентус'}},
+    {name:'де Йонг', c:'Нидерланды', d:{2019:11}, cl:{2019:'Барселона'}},
+    {name:'Стерлинг', c:'Англия', d:{2019:12,2021:15},
+     cl:{2019:'Манчестер Сити',2021:'Манчестер Сити'}},
+    {name:'де Лигт', c:'Нидерланды', d:{2019:15}, cl:{2019:'Ювентус'}},
+    {name:'Тадич', c:'Сербия', d:{2019:20}, cl:{2019:'Аякс'}},
+    {name:'Кулибали', c:'Сенегал', d:{2019:24}, cl:{2019:'Наполи'}},
+    {name:'тер Стеген', c:'Германия', d:{2019:24}, cl:{2019:'Барселона'}},
+    {name:'Вейналдум', c:'Нидерланды', d:{2019:26}, cl:{2019:'Ливерпуль'}},
+    {name:'Жуан Феликс', c:'Португалия', d:{2019:31}, cl:{2019:'Атлетико Мадрид'}},
+    {name:'ван де Бек', c:'Нидерланды', d:{2019:31}, cl:{2019:'Аякс'}},
+    {name:'Сон Хын Мин', c:'Республика Корея', d:{2019:22,2022:11},
+     cl:{2019:'Тоттенхэм',2022:'Тоттенхэм'}},
+    {name:'Лукаку', c:'Бельгия', d:{2021:12}, cl:{2021:'Интернационале / Челси'}},
+    {name:'Кьеллини', c:'Италия', d:{2021:13}, cl:{2021:'Ювентус'}},
+    {name:'Кьер', c:'Дания', d:{2021:18}, cl:{2021:'Милан'}},
+    {name:'Маунт', c:'Англия', d:{2021:19}, cl:{2021:'Челси'}},
+    {name:'Жерар Морено', c:'Испания', d:{2021:26}, cl:{2021:'Вильярреал'}},
+    {name:'Аспиликуэта', c:'Испания', d:{2021:31}, cl:{2021:'Челси'}},
+    {name:'Алле', c:'Кот-д\'Ивуар', d:{2022:13}, cl:{2022:'Аякс / Боруссия Д'}},
+    {name:'Леао', c:'Португалия', d:{2022:14}, cl:{2022:'Милан'}},
+    {name:'Фабиньо', c:'Бразилия', d:{2022:14}, cl:{2022:'Ливерпуль'}},
+    {name:'Каземиро', c:'Бразилия', d:{2022:17}, cl:{2022:'Реал Мадрид / Манчестер Юнайтед'}},
+    {name:'Влахович', c:'Сербия', d:{2022:17}, cl:{2022:'Фиорентина / Ювентус'}},
+    {name:'Буну', c:'Марокко', d:{2023:13}, cl:{2023:'Севилья / Аль-Хиляль'}},
+    {name:'Гюндоган', c:'Германия', d:{2023:14}, cl:{2023:'Манчестер Сити / Барселона'}},
+    {name:'Эмилиано Мартинес', c:'Аргентина', d:{2023:15,2024:18},
+     cl:{2023:'Астон Вилла',2024:'Астон Вилла'}},
+    {name:'Ким Мин Джэ', c:'Республика Корея', d:{2023:22},
+     cl:{2023:'Наполи / Бавария'}},
+    {name:'Онана', c:'Камерун', d:{2023:23},
+     cl:{2023:'Интернационале / Манчестер Юнайтед'}},
+    {name:'Сака', c:'Англия', d:{2023:24,2024:21},
+     cl:{2023:'Арсенал',2024:'Арсенал'}},
+    {name:'Гвардиол', c:'Хорватия', d:{2023:24},
+     cl:{2023:'РБ Лейпциг / Манчестер Сити'}},
+    {name:'Мусиала', c:'Германия', d:{2023:31}, cl:{2023:'Бавария'}},
+    {name:'Барелла', c:'Италия', d:{2021:26,2023:31},
+     cl:{2021:'Интернационале',2023:'Интернационале'}},
+    {name:'Коло Муани', c:'Франция', d:{2023:31},
+     cl:{2023:'Айнтрахт Франкфурт / ПСЖ'}},
+    {name:'Эдегор', c:'Норвегия', d:{2023:31,2024:19},
+     cl:{2023:'Арсенал',2024:'Арсенал'}},
+    {name:'Рубен Диаш', c:'Португалия', d:{2021:26,2023:31,2024:23},
+     cl:{2021:'Манчестер Сити',2023:'Манчестер Сити',2024:'Манчестер Сити'}},
+    {name:'Фоден', c:'Англия', d:{2021:25,2022:31,2024:11},
+     cl:{2021:'Манчестер Сити',2022:'Манчестер Сити',2024:'Манчестер Сити'}},
+    {name:'Вирц', c:'Германия', d:{2024:12,2025:29},
+     cl:{2024:'Байер-04',2025:'Байер-04 / Ливерпуль'}},
+    {name:'Ольмо', c:'Испания', d:{2024:13},
+     cl:{2024:'РБ Лейпциг / Барселона'}},
+    {name:'Лукман', c:'Нигерия', d:{2024:14}, cl:{2024:'Аталанта'}},
+    {name:'Нико Уильямс', c:'Испания', d:{2024:15}, cl:{2024:'Атлетик Бильбао'}},
+    {name:'Джака', c:'Швейцария', d:{2024:16}, cl:{2024:'Байер-04'}},
+    {name:'Вальверде', c:'Уругвай', d:{2024:17}, cl:{2024:'Реал Мадрид'}},
+    {name:'Чалханоглу', c:'Турция', d:{2024:20}, cl:{2024:'Интернационале'}},
+    {name:'Рюдигер', c:'Германия', d:{2022:31,2024:22},
+     cl:{2022:'Челси / Реал Мадрид',2024:'Реал Мадрид'}},
+    {name:'Гримальдо', c:'Испания', d:{2024:28}, cl:{2024:'Байер-04'}},
+    {name:'Довбик', c:'Украина', d:{2024:31}, cl:{2024:'Жирона / Рома'}},
+    {name:'Гирасси', c:'Гвинея', d:{2025:21}, cl:{2025:'Боруссия Д'}},
+    {name:'Макаллистер', c:'Аргентина', d:{2025:22}, cl:{2025:'Ливерпуль'}},
+    {name:'Дюмфрис', c:'Нидерланды', d:{2025:25}, cl:{2025:'Интернационале'}},
+    {name:'Александер-Арнольд', c:'Англия', d:{2019:19,2022:31},
+     cl:{2019:'Ливерпуль',2022:'Ливерпуль'}},
+    {name:'Канселу', c:'Португалия', d:{2022:31}, cl:{2022:'Манчестер Сити'}},
+    {name:'Киммих', c:'Германия', d:{2022:31}, cl:{2022:'Бавария'}},
+    {name:'Меньян', c:'Франция', d:{2022:31}, cl:{2022:'Милан'}},
+    {name:'Нкунку', c:'Франция', d:{2022:31}, cl:{2022:'РБ Лейпциг'}},
+    {name:'Нуньес', c:'Уругвай', d:{2022:31}, cl:{2022:'Бенфика / Ливерпуль'}}
+  ];
+
+  const merged = {};
+  allPlayersData.forEach(p => {
+    if (!p.d || Object.keys(p.d).length === 0) return;
+    if (!merged[p.name]) merged[p.name] = {name:p.name, country:p.c, data:{}, clubs:{}, noVotes:new Set()};
+    Object.assign(merged[p.name].data, p.d);
+    Object.assign(merged[p.name].clubs, p.cl || {});
+  });
+  // Конвенция данных: место 31 = «в этом году голосов не было».
+  // Внутри приводим к 30 + пометка noVotes, чтобы фильтр по месту,
+  // ось Y и тултип работали без спец-обработки 31.
+  Object.values(merged).forEach(p => {
+    Object.keys(p.data).forEach(y => {
+      if (Number(p.data[y]) === 31) {
+        p.data[y] = 30;
+        p.noVotes.add(Number(y));
+      }
+    });
+  });
+  const allPlayers = Object.values(merged);
+
+  function countryOf(name){
+    const p = merged[name];
+    return p && p.country ? p.country : 'Неизвестно';
+  }
+  // «Без голосов» — только явная пометка (место 31 в данных).
+  // 30-е место само по себе — с голосами.
+  function isNoVote(p, year){
+    if (!p || !p.data || p.data[year] === undefined) return false;
+    return !!(p.noVotes && p.noVotes.has(Number(year)));
+  }
+  function clubsByYear(name, year){
+    const p = merged[name];
+    if (!p || !p.clubs || p.clubs[year] === undefined) return [];
+    return String(p.clubs[year]).split(/\s*\/\s*/).filter(Boolean);
+  }
+  function clubsOf(name){
+    const p = merged[name];
+    if (!p || !p.clubs) return [];
+    const set = new Set();
+    Object.values(p.clubs).forEach(v => String(v).split(/\s*\/\s*/).forEach(c => { if (c) set.add(c); }));
+    return Array.from(set);
+  }
+
+  const allCountries = [...new Set(allPlayers.map(p => p.country))]
+    .filter(c => c && c !== 'Неизвестно')
+    .sort((a, b) => a.localeCompare(b, 'ru'));
+
+  const allClubs = (() => {
+    const set = new Set();
+    allPlayers.forEach(p => clubsOf(p.name).forEach(c => set.add(c)));
+    return Array.from(set).sort((a, b) => a.localeCompare(b, 'ru'));
+  })();
+
+  function isGraphEligible(p){
+    return Object.keys(p.data).length > 0;
+  }
+
+  const allPlayersByName = {};
+  allPlayers.forEach(p => allPlayersByName[p.name] = p);
+
+  const W = 1100;
+  let H = 600;
+  const plot = {left:80, right:1040, top:70, bottom:430};
+  let currentMaxPlace = 30;
+  let currentLayout = {};
+
+  const xOf = y => plot.left + years.indexOf(y) * (plot.right - plot.left) / (years.length - 1);
+  const yOf = p => plot.top + (p - 1) * (plot.bottom - plot.top) / (currentMaxPlace - 1);
+
+  const svg = document.createElementNS(svgNS, 'svg');
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  svg.setAttribute('xmlns', svgNS);
+  document.getElementById('chartWrap').appendChild(svg);
+
+  function el(tag, attrs, parent){
+    const e = document.createElementNS(svgNS, tag);
+    for (const k in attrs) e.setAttribute(k, attrs[k]);
+    (parent || svg).appendChild(e);
+    return e;
+  }
+
+  const bgRect = el('rect', {x:0,y:0,width:W,height:H,fill:'#ffffff'});
+  const gRoot = el('g', {id:'zoomRoot'});
+  const gGrid = el('g', {}, gRoot);
+  const gAxes = el('g', {}, gRoot);
+
+  function updateDimensions(){
+    const extraRows = Math.max(0, currentMaxPlace - 30);
+    H = 600 + extraRows * 10;
+    plot.bottom = H - 170;
+    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    bgRect.setAttribute('height', H);
+  }
+
+  function drawGrid(){
+    while (gGrid.firstChild) gGrid.removeChild(gGrid.firstChild);
+    years.forEach(y => el('line', {x1:xOf(y), y1:plot.top, x2:xOf(y), y2:plot.bottom,
+      stroke:'#eff1f3', 'stroke-width':1}, gGrid));
+    for (let p = 1; p <= currentMaxPlace; p++){
+      const major = (p===1 || p%5===0);
+      el('line', {x1:plot.left, y1:yOf(p), x2:plot.right, y2:yOf(p),
+        stroke: major ? '#d5d9df' : '#eef0f3', 'stroke-width': major ? 1.1 : 0.8}, gGrid);
+    }
+  }
+
+  function drawAxes(){
+    while (gAxes.firstChild) gAxes.removeChild(gAxes.firstChild);
+    el('line', {x1:plot.left-2, y1:plot.top-4, x2:plot.left-2, y2:plot.bottom+2,
+      stroke:'#333', 'stroke-width':1.4}, gAxes);
+    el('line', {x1:plot.left-2, y1:plot.bottom, x2:plot.right+4, y2:plot.bottom,
+      stroke:'#333', 'stroke-width':1.4}, gAxes);
+    for (let p = 1; p <= currentMaxPlace; p++){
+      const major = (p===1 || p%5===0 || p===currentMaxPlace);
+      const t = el('text', {x:plot.left-12, y:yOf(p)+3.5, 'text-anchor':'end',
+        'font-size': major?11:9, 'font-weight': major?600:400, fill: major?'#333':'#888'}, gAxes);
+      t.textContent = p;
+      const t2 = el('text', {x:plot.right+12, y:yOf(p)+3.5, 'text-anchor':'start',
+        'font-size': major?11:9, 'font-weight': major?600:400, fill: major?'#333':'#888'}, gAxes);
+      t2.textContent = p;
+    }
+    years.forEach(y => {
+      const t1 = el('text', {x:xOf(y), y:plot.bottom+22, 'text-anchor':'middle','font-size':11, fill:'#333'}, gAxes);
+      t1.textContent = y;
+      const t2 = el('text', {x:xOf(y), y:plot.top-18, 'text-anchor':'middle','font-size':11, fill:'#333'}, gAxes);
+      t2.textContent = y;
+    });
+    const ax = el('text', {x:(plot.left+plot.right)/2, y:plot.bottom+46, 'text-anchor':'middle','font-size':12,fill:'#666'}, gAxes);
+    ax.textContent = 'Год вручения';
+    const ay = el('text', {x:22, y:(plot.top+plot.bottom)/2, 'text-anchor':'middle','font-size':12, fill:'#666',
+      transform:`rotate(-90 22 ${(plot.top+plot.bottom)/2})`}, gAxes);
+    ay.textContent = 'Место';
+  }
+
+  const gSeries = el('g', {'class': 'series-lines'}, gRoot);
+  const gBadges = el('g', {}, gRoot);
+  gBadges.style.display = 'none';
+  gBadges.style.pointerEvents = 'none';
+
+  const seriesGroups = {};
+  const badgeGroups = {};
+  const chipRefs = {};
+  const activePlayers = {};
+  const palette = ['#1f4e79','#c00000','#ff8c00','#2e7d32','#6a1b9a','#795548','#d81b60','#827717','#00838f','#386641','#1565c0','#b71c1c','#00695c','#ad1457','#4a148c','#006064','#b8860b','#ff6347','#8e24aa','#00897b','#5d4037','#546e7a','#ef6c00','#558b2f','#4527a0','#c2185b','#f9a825','#6d4c41','#0277bd'];
+  let nextBadgeNum = 1;
+  let hitPoints = [];
+  let hitLines = [];
+
+  function recomputeLayout(){
+    currentLayout = {};
+    currentMaxPlace = 30;
+    years.forEach(year => {
+      currentLayout[year] = {};
+      const voted = [];    // в этом году голоса есть (включая 30-е место без пометки)
+      const noVote = [];   // в этом году помечен как «без голосов»
+      Object.values(activePlayers).forEach(p => {
+        if (p.data[year] === undefined) return;
+        if (!isPointVisible(p, year)) return;
+        if (isNoVote(p, year)) noVote.push(p.name);
+        else voted.push({ name: p.name, place: Number(p.data[year]) });
+      });
+
+      // 1) сначала все, у кого голоса есть — по обычным правилам совпадений
+      const byPlace = {};
+      voted.forEach(v => {
+        if (!byPlace[v.place]) byPlace[v.place] = [];
+        byPlace[v.place].push(v.name);
+      });
+      const usedPositions = new Set(voted.map(v => v.place));
+      let maxVotedPlace = voted.length ? Math.max(...voted.map(v => v.place)) : 0;
+
+      Object.keys(byPlace).map(Number).sort((a,b)=>a-b).forEach(place => {
+        const names = byPlace[place].sort((a,b)=>a.localeCompare(b, 'ru'));
+        if (names.length <= 3){
+          names.forEach((name, idx) => {
+            currentLayout[year][name] = { place, hIdx: idx, hCount: names.length };
+          });
+        } else {
+          currentLayout[year][names[0]] = { place, hIdx: 0, hCount: 1 };
+          let nextFree = place;
+          for (let i = 1; i < names.length; i++){
+            nextFree++;
+            while (usedPositions.has(nextFree)) nextFree++;
+            usedPositions.add(nextFree);
+            currentLayout[year][names[i]] = { place: nextFree, hIdx: 0, hCount: 1 };
+            if (nextFree > maxVotedPlace) maxVotedPlace = nextFree;
+          }
+        }
+      });
+
+      // 2) и только потом — все, у кого голосов не было: строго ниже последнего
+      //    места, занятого игроком с голосами (но не выше 30-го)
+      if (noVote.length){
+        const names = noVote.sort((a,b)=>a.localeCompare(b, 'ru'));
+        const start = Math.max(30, maxVotedPlace + 1);
+        if (names.length <= 3){
+          names.forEach((name, idx) => {
+            currentLayout[year][name] = { place: start, hIdx: idx, hCount: names.length };
+          });
+        } else {
+          names.forEach((name, idx) => {
+            currentLayout[year][name] = { place: start + idx, hIdx: 0, hCount: 1 };
+          });
+        }
+        const last = start + names.length - 1;
+        if (last > maxVotedPlace) maxVotedPlace = last;
+      }
+
+      if (maxVotedPlace > currentMaxPlace) currentMaxPlace = maxVotedPlace;
+    });
+  }
+
+  function getXOffset(name, year){
+    if (!currentLayout[year] || !currentLayout[year][name]) return 0;
+    const pos = currentLayout[year][name];
+    if (pos.hCount <= 1) return 0;
+    return (pos.hIdx - (pos.hCount - 1) / 2) * 10;
+  }
+  function getYPlace(name, year){
+    if (!currentLayout[year] || !currentLayout[year][name]){
+      const p = activePlayers[name];
+      return p ? p.data[year] : undefined;
+    }
+    return currentLayout[year][name].place;
+  }
+
+  const tooltip = document.getElementById('tooltip');
+  function showTip(e, p, year, place){
+    const clubs = clubsByYear(p.name, year).join(' / ') || '—';
+    const placeTxt = isNoVote(p, year) ? 'без голосов' : `${place}-е место`;
+    tooltip.innerHTML = `<div class="nm"><span class="dot" style="background:${p.color}"></span>${p.name}</div>` +
+      `<div class="mt">${year} · ${placeTxt} · ${clubs}</div>`;
+    tooltip.style.opacity = 1;
+    moveTip(e);
+  }
+function showLineTip(e, p, year1, year2, isDashed){
+  const clubs1 = clubsByYear(p.name, year1);
+  const clubs2 = clubsByYear(p.name, year2);
+  const startClub = clubs1.length > 1 ? clubs1[clubs1.length - 1] : (clubs1[0] || '');
+  const endClub = clubs2.length > 1 ? clubs2[0] : (clubs2[0] || '');
+  let clubText = '';
+  if (isDashed){
+    if (startClub && endClub){
+      clubText = startClub === endClub ? startClub : `${startClub} – ${endClub}`;
+    } else {
+      clubText = startClub || endClub;
+    }
+  } else {
+    clubText = startClub || '—';
+  }
+  const yearText = `${year1}–${year2}`;
+  const mt = clubText ? `${yearText} · ${clubText}` : yearText;
+  tooltip.innerHTML = `<div class="nm"><span class="dot" style="background:${p.color}"></span>${p.name}</div>` +
+    `<div class="mt">${mt}</div>`;
+  tooltip.style.opacity = 1;
+  moveTip(e);
+}
+  function moveTip(e){
+    const pad=14, r=tooltip.getBoundingClientRect();
+    let x=e.clientX+pad, y=e.clientY+pad;
+    if(x+r.width>window.innerWidth-8) x=e.clientX-r.width-pad;
+    if(y+r.height>window.innerHeight-8) y=e.clientY-r.height-pad;
+    tooltip.style.left=x+'px'; tooltip.style.top=y+'px';
+  }
+  function hideTip(){ tooltip.style.opacity = 0; }
+
+  function highlightPlayer(name){
+    Object.keys(seriesGroups).forEach(n => {
+      seriesGroups[n].style.opacity = n === name ? 1 : 0.12;
+    });
+    Object.keys(badgeGroups).forEach(n => {
+      badgeGroups[n].style.opacity = n === name ? 1 : 0.12;
+    });
+    if (seriesGroups[name] && seriesGroups[name].parentNode) seriesGroups[name].parentNode.appendChild(seriesGroups[name]);
+    if (badgeGroups[name] && badgeGroups[name].parentNode) badgeGroups[name].parentNode.appendChild(badgeGroups[name]);
+  }
+  function clearHighlight(){
+    Object.values(seriesGroups).forEach(g => g.style.opacity = 1);
+    Object.values(badgeGroups).forEach(g => g.style.opacity = 1);
+  }
+
+function drawSeries(p){
+  if (seriesGroups[p.name]) seriesGroups[p.name].remove();
+
+  const ys = Object.keys(p.data).map(Number)
+    .filter(y => isPointVisible(p, y))
+    .sort((a, b) => a - b);
+  if (ys.length === 0) return;
+
+  const g = el('g', {}, gSeries);
+  seriesGroups[p.name] = g;
+  for (let i = 0; i < ys.length - 1; i++){
+    const y1 = ys[i], y2 = ys[i+1];
+    let gap = false;
+    for (let y = y1+1; y < y2; y++){ if (y !== 2020 && years.includes(y)){ gap = true; break; } }
+    const x1 = xOf(y1) + getXOffset(p.name, y1);
+    const x2 = xOf(y2) + getXOffset(p.name, y2);
+    el('line', {
+      x1, y1: yOf(getYPlace(p.name, y1)),
+      x2, y2: yOf(getYPlace(p.name, y2)),
+      stroke: p.color, 'stroke-width': 2,
+      'stroke-dasharray': gap ? '5,4' : 'none'
+    }, g);
+  }
+  ys.forEach(y => {
+    const cx = xOf(y) + getXOffset(p.name, y);
+    el('circle', {cx, cy:yOf(getYPlace(p.name, y)), r:3.4, fill:p.color, stroke:'#fff', 'stroke-width':1.1}, g);
+  });
+}
+
+function drawBadge(p, num){
+  if (badgeGroups[p.name]) badgeGroups[p.name].remove();
+  const ys = Object.keys(p.data).map(Number)
+    .filter(y => isPointVisible(p, y))
+    .sort((a, b) => a - b);
+  if (ys.length === 0) return;
+  const x = xOf(ys[0]) + getXOffset(p.name, ys[0]);
+    const y = yOf(getYPlace(p.name, ys[0])) - 20;
+    const g = el('g', {}, gBadges);
+    badgeGroups[p.name] = g;
+    el('circle', {cx:x, cy:y, r:9, fill:'#fff', stroke:p.color, 'stroke-width':1.8}, g);
+    const t = el('text', {x, y:y+3.5, 'text-anchor':'middle', 'font-size':10, 'font-weight':700, fill:p.color}, g);
+    t.textContent = num;
+  }
+
+  function rebuildHitPoints(){
+    hitPoints = [];
+    hitLines = [];
+    Object.values(activePlayers).forEach(p => {
+      const ys = Object.keys(p.data).map(Number).sort((a,b)=>a-b);
+      ys.forEach(y => {
+        const cx = xOf(y) + getXOffset(p.name, y);
+        const cy = yOf(getYPlace(p.name, y));
+        hitPoints.push({cx, cy, player: p, year: y, place: p.data[y]});
+      });
+for (let i = 0; i < ys.length - 1; i++){
+  const y1 = ys[i], y2 = ys[i+1];
+  let gap = false;
+  for (let y = y1+1; y < y2; y++){ if (y !== 2020 && years.includes(y)){ gap = true; break; } }
+  const x1 = xOf(y1) + getXOffset(p.name, y1);
+  const x2 = xOf(y2) + getXOffset(p.name, y2);
+  const cy1 = yOf(getYPlace(p.name, y1));
+  const cy2 = yOf(getYPlace(p.name, y2));
+  hitLines.push({x1, y1: cy1, x2, y2: cy2, player: p, year1: y1, year2: y2, gap});
+}
+    });
+  }
+
+  // Для стран: только год (место и клуб — не влияют: игрок представляет страну всегда)
+  function isCountryNomination(p, y){
+    if (p.data[y] === undefined) return false;
+    if (selectedYears !== 'all' && !selectedYears.includes(y)) return false;
+    if (hideNoVotes && isNoVote(p, y)) return false;
+    if (filteredPointsMode && p.data[y] > placeMax) return false;
+    return true;
+  }
+
+  // Для клубов: год + клуб (при активном клубном фильтре)
+  function isClubNomination(p, y){
+    if (p.data[y] === undefined) return false;
+    if (selectedYears !== 'all' && !selectedYears.includes(y)) return false;
+    if (hideNoVotes && isNoVote(p, y)) return false;
+    if (filteredPointsMode && p.data[y] > placeMax) return false;
+    if (selectedClubs !== 'all'){
+      const clubsY = clubsByYear(p.name, y);
+      if (!clubsY.some(c => selectedClubs.includes(c))) return false;
+    }
+    return true;
+  }
+
+function isPointVisible(p, year){
+  if (!p.data || p.data[year] === undefined) return false;
+  if (!filteredPointsMode) return true;
+  if (selectedYears !== 'all' && !selectedYears.includes(year)) return false;
+  if (p.data[year] > placeMax) return false;
+  if (hideNoVotes && isNoVote(p, year)) return false;
+  if (selectedClubs !== 'all'){
+    const clubsY = clubsByYear(p.name, year);
+    if (!clubsY.some(c => selectedClubs.includes(c))) return false;
+  }
+  return true;
+}
+
+  function updateSummary(){
+    const tbody = document.getElementById('summaryBody');
+    if (!tbody) return;
+
+    const clubPlayers = {};
+    const clubNoms = {};
+    const countryPlayers = {};
+    const countryNoms = {};
+
+    Object.values(activePlayers).forEach(p => {
+      const c = p.country || countryOf(p.name);
+      Object.keys(p.data).map(Number).forEach(y => {
+        if (isCountryNomination(p, y)){
+          if (!countryPlayers[c]) countryPlayers[c] = new Set();
+          countryPlayers[c].add(p.name);
+          countryNoms[c] = (countryNoms[c] || 0) + 1;
+        }
+        if (isClubNomination(p, y)){
+          clubsByYear(p.name, y).forEach(club => {
+            if (!clubPlayers[club]) clubPlayers[club] = new Set();
+            clubPlayers[club].add(p.name);
+            clubNoms[club] = (clubNoms[club] || 0) + 1;
+          });
+        }
+      });
+    });
+
+    const clubs = Object.keys(clubPlayers).map(cl => ({
+      name: cl, players: clubPlayers[cl].size, noms: clubNoms[cl] || 0
+    })).sort((a,b) => b.players - a.players || b.noms - a.noms || a.name.localeCompare(b.name, 'ru'));
+
+    const countries = Object.keys(countryPlayers).map(cn => ({
+      name: cn, players: countryPlayers[cn].size, noms: countryNoms[cn] || 0
+    })).sort((a,b) => b.players - a.players || b.noms - a.noms || a.name.localeCompare(b.name, 'ru'));
+
+    const maxLen = Math.max(clubs.length, countries.length);
+    tbody.innerHTML = '';
+    if (maxLen === 0){
+      tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:#9ca3af;padding:8px">Нет игроков на графике</td></tr>';
+      return;
+    }
+    for (let i = 0; i < maxLen; i++){
+      const c = clubs[i] || {name:'', players:'', noms:''};
+      const k = countries[i] || {name:'', players:'', noms:''};
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${c.name}</td><td>${c.players}</td><td>${c.noms}</td>` +
+                     `<td>${k.name}</td><td>${k.players}</td><td>${k.noms}</td>`;
+      tbody.appendChild(tr);
+    }
+        const sumClubPlayers = clubs.reduce((s, c) => s + c.players, 0);
+    const sumClubNoms = clubs.reduce((s, c) => s + c.noms, 0);
+    const sumCountryPlayers = countries.reduce((s, c) => s + c.players, 0);
+    const sumCountryNoms = countries.reduce((s, c) => s + c.noms, 0);
+    const uniqueOnGraph = Object.keys(activePlayers).length;
+
+    const trSum = document.createElement('tr');
+    trSum.className = 'summary-sum';
+    trSum.innerHTML =
+      `<td>Итого</td>` +
+      `<td title="Сумма по клубам; игрок, выступавший за несколько клубов, учтён в каждом">${sumClubPlayers}</td>` +
+      `<td title="Сумма по клубам; при переходе внутри года номинация учтена у обоих клубов">${sumClubNoms}</td>` +
+      `<td>Итого</td>` +
+      `<td title="Уникальных игроков на графике: ${uniqueOnGraph}">${sumCountryPlayers}</td>` +
+      `<td title="Всего номинаций в выбранных годах">${sumCountryNoms}</td>`;
+    tbody.appendChild(trSum);
+  }
+
+  const chipsEl = document.getElementById('chips');
+
+  function addChip(p){
+    if (chipRefs[p.name]) return;
+    const b = document.createElement('button');
+    b.type='button'; b.className='chip';
+    b.innerHTML = `<span class="sw" style="background:${p.color}"></span><span>${p.name}</span><span class="x">×</span>`;
+    b.title = 'Убрать с графика';
+    b.addEventListener('mouseenter', () => highlightPlayer(p.name));
+    b.addEventListener('mouseleave', () => clearHighlight());
+    b.addEventListener('click', () => {
+      removePlayer(p.name);
+      renderTable(searchInput.value);
+      updateFilterInfo();
+    });
+    chipRefs[p.name] = b;
+    chipsEl.appendChild(b);
+  }
+  function removeChip(name){
+    if (chipRefs[name]) { chipRefs[name].remove(); delete chipRefs[name]; }
+  }
+
+  function pickColor(){
+    const used = new Set(Object.values(activePlayers).map(p => p.color));
+    for (const c of palette) if (!used.has(c)) return c;
+    return palette[Object.keys(activePlayers).length % palette.length];
+  }
+
+  function addPlayer(name, silent){
+    if (activePlayers[name]) return false;
+    const src = allPlayersByName[name];
+    if (!src) return false;
+    if (!isGraphEligible(src)) return false;
+    const p = {name: src.name, color: pickColor(), data: src.data, clubs: src.clubs, noVotes: src.noVotes, badgeNum: nextBadgeNum++};
+    activePlayers[name] = p;
+    addChip(p);
+    if (!silent) redrawAll();
+    return true;
+  }
+  function removePlayer(name, silent){
+    if (!activePlayers[name]) return false;
+    removeChip(name);
+    delete activePlayers[name];
+    if (!silent) redrawAll();
+    return true;
+  }
+
+  function redrawAll(){
+    recomputeLayout();
+    updateDimensions();
+    drawGrid();
+    drawAxes();
+    Object.keys(seriesGroups).forEach(n => { seriesGroups[n].remove(); delete seriesGroups[n]; });
+    Object.keys(badgeGroups).forEach(n => { badgeGroups[n].remove(); delete badgeGroups[n]; });
+    Object.values(activePlayers).forEach(p => {
+      drawSeries(p);
+      drawBadge(p, p.badgeNum);
+    });
+    rebuildHitPoints();
+    updateEmptyHint();
+    updateSummary();
+  }
+
+  function updateEmptyHint(){
+    const hint = document.getElementById('emptyHint');
+    const count = Object.keys(activePlayers).length;
+    if (count > 0) {
+      hint.classList.add('hidden');
+    } else {
+      const matching = getMatchingPlayers().length;
+      hint.textContent = matching === 0
+        ? 'Нет игроков, подходящих под фильтры. Измените фильтры.'
+        : 'График пуст.';
+      hint.classList.remove('hidden');
+    }
+  }
+
+  let selectedYears = [2024, 2025, 2026];
+  let placeMax = 3;
+  let selectedCountries = 'all';
+  let selectedClubs = 'all';
+  let minNominations = 0;
+  let hideNoVotes = false;
+  let filteredPointsMode = false;
+
+  function matchesFilter(p){
+    if (!isGraphEligible(p)) return false;
+    if (selectedCountries !== 'all'){
+      if (selectedCountries.length === 0) return false;
+      if (!selectedCountries.includes(p.country)) return false;
+    }
+    if (minNominations > 0){
+      if (Object.keys(p.data).length <= minNominations) return false;
+    }
+    if (selectedClubs !== 'all' && selectedClubs.length === 0) return false;
+    // Год, место, клуб и «без голосов» проверяются в ОДНОМ И ТОМ ЖЕ году
+    const checkYears = selectedYears === 'all' ? years : selectedYears;
+    if (checkYears.length === 0) return false;
+    for (const y of checkYears){
+      if (p.data[y] === undefined) continue;
+      if (p.data[y] > placeMax) continue;
+      if (hideNoVotes && isNoVote(p, y)) continue;
+      if (selectedClubs !== 'all'){
+        const clubsY = clubsByYear(p.name, y);
+        if (!clubsY.some(c => selectedClubs.includes(c))) continue;
+      }
+      return true;
+    }
+    return false;
+  }
+
+  function getMatchingPlayers(){ return allPlayers.filter(matchesFilter); }
+
+  function syncChartToFilter(){
+    const matching = getMatchingPlayers();
+    const matchingNames = new Set(matching.map(p => p.name));
+    Object.keys(activePlayers).forEach(name => {
+      if (!matchingNames.has(name)) removePlayer(name, true);
+    });
+    matchingNames.forEach(name => {
+      if (!activePlayers[name]) addPlayer(name, true);
+    });
+    redrawAll();
+    renderTable(searchInput.value);
+    updateFilterInfo();
+  }
+
+  const yearDropdown = document.getElementById('yearDropdown');
+  const yearTrigger = document.getElementById('yearTrigger');
+  const yearPanel = document.getElementById('yearPanel');
+  const yearLabel = document.getElementById('yearLabel');
+
+  years.forEach(y => {
+    const lbl = document.createElement('label');
+    const checked = selectedYears.includes(y) ? 'checked' : '';
+    lbl.innerHTML = `<input type="checkbox" data-year="${y}" ${checked}> ${y}`;
+    yearPanel.appendChild(lbl);
+  });
+
+  yearTrigger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = yearPanel.classList.contains('open');
+    yearPanel.classList.toggle('open', !isOpen);
+    yearTrigger.classList.toggle('active', !isOpen);
+  });
+  document.addEventListener('click', (e) => {
+    if (!yearDropdown.contains(e.target)){
+      yearPanel.classList.remove('open'); yearTrigger.classList.remove('active');
+    }
+    if (!countryDropdown.contains(e.target)){
+      countryPanel.classList.remove('open'); countryTrigger.classList.remove('active');
+    }
+    if (!clubDropdown.contains(e.target)){
+      clubPanel.classList.remove('open'); clubTrigger.classList.remove('active');
+    }
+  });
+  document.querySelectorAll('.panel-search').forEach(input => {
+    input.addEventListener('input', () => {
+      const panel = document.getElementById(input.dataset.searchFor);
+      if (!panel) return;
+      const q = input.value.trim().toLowerCase();
+      panel.querySelectorAll('label').forEach(label => {
+        const dataValue = label.querySelector('input[type="checkbox"]');
+        if (!dataValue) return;
+        const key = dataValue.dataset.year || dataValue.dataset.country || dataValue.dataset.club || '';
+        if (key === 'all') { label.style.display = ''; return; }
+        label.style.display = key.toLowerCase().includes(q) ? '' : 'none';
+      });
+    });
+  });
+  yearPanel.addEventListener('change', (e) => {
+    if (!e.target.matches('input[type="checkbox"]')) return;
+    const allCb = yearPanel.querySelector('[data-year="all"]');
+    const yearCbs = [...yearPanel.querySelectorAll('input[type="checkbox"]:not([data-year="all"])')];
+    if (e.target.dataset.year === 'all'){
+      yearCbs.forEach(cb => { cb.checked = allCb.checked; });
+    } else {
+      allCb.checked = yearCbs.every(cb => cb.checked);
+    }
+    const anyChecked = yearCbs.some(cb => cb.checked);
+    if (!anyChecked){
+      selectedYears = [];
+    } else if (yearCbs.every(cb => cb.checked)){
+      selectedYears = 'all';
+    } else {
+      selectedYears = yearCbs.filter(cb => cb.checked).map(cb => Number(cb.dataset.year));
+    }
+    updateYearLabel();
+    syncChartToFilter();
+  });
+  function updateYearLabel(){
+    if (selectedYears === 'all') yearLabel.textContent = 'Все годы';
+    else if (selectedYears.length === 0) yearLabel.textContent = 'Ничего не выбрано';
+    else if (selectedYears.length === 1) yearLabel.textContent = String(selectedYears[0]);
+    else yearLabel.textContent = selectedYears.slice().sort().join(', ');
+  }
+
+  const countryDropdown = document.getElementById('countryDropdown');
+  const countryTrigger = document.getElementById('countryTrigger');
+  const countryPanel = document.getElementById('countryPanel');
+  const countryLabel = document.getElementById('countryLabel');
+
+  allCountries.forEach(c => {
+    const lbl = document.createElement('label');
+    lbl.innerHTML = `<input type="checkbox" data-country="${c}" checked> ${c}`;
+    countryPanel.appendChild(lbl);
+  });
+
+  countryTrigger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = countryPanel.classList.contains('open');
+    countryPanel.classList.toggle('open', !isOpen);
+    countryTrigger.classList.toggle('active', !isOpen);
+  });
+  countryPanel.addEventListener('change', (e) => {
+    if (!e.target.matches('input[type="checkbox"]')) return;
+    const allCb = countryPanel.querySelector('[data-country="all"]');
+    const cCbs = [...countryPanel.querySelectorAll('input[type="checkbox"]:not([data-country="all"])')];
+    if (e.target.dataset.country === 'all'){ cCbs.forEach(cb => cb.checked = allCb.checked); }
+    else { allCb.checked = cCbs.every(cb => cb.checked); }
+    const anyChecked = cCbs.some(cb => cb.checked);
+    if (!anyChecked) selectedCountries = [];
+    else if (cCbs.every(cb => cb.checked)) selectedCountries = 'all';
+    else selectedCountries = cCbs.filter(cb => cb.checked).map(cb => cb.dataset.country);
+    updateCountryLabel();
+    syncChartToFilter();
+  });
+  function updateCountryLabel(){
+    if (selectedCountries === 'all') countryLabel.textContent = 'Все страны';
+    else if (selectedCountries.length === 0) countryLabel.textContent = 'Ничего не выбрано';
+    else if (selectedCountries.length === 1) countryLabel.textContent = selectedCountries[0];
+    else countryLabel.textContent = `${selectedCountries.length} стран`;
+  }
+
+  const clubDropdown = document.getElementById('clubDropdown');
+  const clubTrigger = document.getElementById('clubTrigger');
+  const clubPanel = document.getElementById('clubPanel');
+  const clubLabel = document.getElementById('clubLabel');
+
+  allClubs.forEach(c => {
+    const lbl = document.createElement('label');
+    lbl.innerHTML = `<input type="checkbox" data-club="${c}" checked> ${c}`;
+    clubPanel.appendChild(lbl);
+  });
+  clubTrigger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = clubPanel.classList.contains('open');
+    clubPanel.classList.toggle('open', !isOpen);
+    clubTrigger.classList.toggle('active', !isOpen);
+  });
+  clubPanel.addEventListener('change', (e) => {
+    if (!e.target.matches('input[type="checkbox"]')) return;
+    const allCb = clubPanel.querySelector('[data-club="all"]');
+    const cCbs = [...clubPanel.querySelectorAll('input[type="checkbox"]:not([data-club="all"])')];
+    if (e.target.dataset.club === 'all'){ cCbs.forEach(cb => cb.checked = allCb.checked); }
+    else { allCb.checked = cCbs.every(cb => cb.checked); }
+    const anyChecked = cCbs.some(cb => cb.checked);
+    if (!anyChecked) selectedClubs = [];
+    else if (cCbs.every(cb => cb.checked)) selectedClubs = 'all';
+    else selectedClubs = cCbs.filter(cb => cb.checked).map(cb => cb.dataset.club);
+    updateClubLabel();
+    syncChartToFilter();
+  });
+  function updateClubLabel(){
+    if (selectedClubs === 'all') clubLabel.textContent = 'Все клубы';
+    else if (selectedClubs.length === 0) clubLabel.textContent = 'Ничего не выбрано';
+    else if (selectedClubs.length === 1) clubLabel.textContent = selectedClubs[0];
+    else clubLabel.textContent = `${selectedClubs.length} клубов`;
+  }
+
+  const placeFilterEl = document.getElementById('placeFilter');
+  placeFilterEl.addEventListener('change', () => {
+    placeMax = parseInt(placeFilterEl.value, 10);
+    syncChartToFilter();
+  });
+
+  const nomFilterEl = document.getElementById('nomFilter');
+  nomFilterEl.addEventListener('change', () => {
+    minNominations = parseInt(nomFilterEl.value, 10);
+    syncChartToFilter();
+  });
+
+  const toggleNoVotesBtn = document.getElementById('toggleNoVotes');
+  function updateNoVotesBtn(){
+    toggleNoVotesBtn.textContent = hideNoVotes
+      ? 'Показать игроков без голосов'
+      : 'Скрыть игроков без голосов';
+  }
+  toggleNoVotesBtn.addEventListener('click', () => {
+    hideNoVotes = !hideNoVotes;
+    updateNoVotesBtn();
+    syncChartToFilter();
+  });
+  updateNoVotesBtn();
+
+const toggleFilteredPointsBtn = document.getElementById('toggleFilteredPoints');
+function updateFilteredPointsBtn(){
+  if (!toggleFilteredPointsBtn) return;
+  toggleFilteredPointsBtn.textContent = filteredPointsMode
+    ? 'Показать всю историю'
+    : 'Только выбранные годы';
+  toggleFilteredPointsBtn.classList.toggle('active', filteredPointsMode);
+  toggleFilteredPointsBtn.title = filteredPointsMode
+    ? 'Показать полную историю всех игроков на графике'
+    : 'Показать только точки, соответствующие текущим фильтрам';
+}
+toggleFilteredPointsBtn.addEventListener('click', () => {
+  filteredPointsMode = !filteredPointsMode;
+  updateFilteredPointsBtn();
+  redrawAll();            // не syncChartToFilter: набор игроков не меняется
+  updateFilterInfo();
+});
+updateFilteredPointsBtn();
+
+  let scale=1, tx=0, ty=0;
+  function apply(){
+    gRoot.setAttribute('transform', `translate(${tx} ${ty}) scale(${scale})`);
+    svg.style.touchAction = scale > 1 ? 'none' : 'pan-x pan-y';
+  }
+  function clamp(){ const o=scale-1; tx=Math.min(0,Math.max(-W*o,tx)); ty=Math.min(0,Math.max(-H*o,ty)); }
+  function zoomAt(cx,cy,f){
+    const ns=Math.min(12,Math.max(1,scale*f)); if(ns===scale) return;
+    const k=ns/scale; tx=cx-k*(cx-tx); ty=cy-k*(cy-ty); scale=ns;
+    if(scale===1){tx=0;ty=0;} clamp(); apply();
+  }
+  function toSvgCoords(clientX, clientY){
+    const r = svg.getBoundingClientRect();
+    return { x: (clientX - r.left) / r.width * W, y: (clientY - r.top) / r.height * H };
+  }
+  svg.addEventListener('wheel', e=>{
+    e.preventDefault();
+    const p = toSvgCoords(e.clientX, e.clientY);
+    zoomAt(p.x, p.y, Math.exp(-e.deltaY*0.0018));
+  }, {passive:false});
+
+  let drag=false,lx=0,ly=0;
+    svg.addEventListener('pointerdown', e=>{ if(e.button!==0)return; drag=true; lx=e.clientX; ly=e.clientY;
+    svg.classList.add('dragging');
+    svg.setPointerCapture(e.pointerId); svg.classList.remove('hover-point'); });svg.addEventListener('pointermove', e=>{
+    if(!drag)return;
+    const r=svg.getBoundingClientRect();
+    tx+=(e.clientX-lx)/r.width*W; ty+=(e.clientY-ly)/r.height*H; lx=e.clientX; ly=e.clientY;
+    clamp(); apply();
+  });
+  function endDrag(){ drag=false; svg.classList.remove('dragging'); }
+  svg.addEventListener('pointerup', endDrag); svg.addEventListener('pointercancel', endDrag);
+  svg.addEventListener('dblclick', ()=>{ scale=1;tx=0;ty=0; apply(); });
+
+  document.getElementById('zoomIn').onclick = ()=>{ const cx=W/2,cy=H/2; zoomAt(cx,cy,1.4); };
+  document.getElementById('zoomOut').onclick = ()=>{ const cx=W/2,cy=H/2; zoomAt(cx,cy,1/1.4); };
+const chartOuter = document.getElementById('chartOuter');
+const exitFullscreenBtn = document.getElementById('exitFullscreen');
+
+function setFullscreen(on){
+  chartOuter.classList.toggle('fullscreen', on);
+}
+
+document.getElementById('toggleFullscreen').onclick = () => {
+  setFullscreen(!chartOuter.classList.contains('fullscreen'));
+};
+
+exitFullscreenBtn.addEventListener('click', () => setFullscreen(false));
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && chartOuter.classList.contains('fullscreen')){
+    setFullscreen(false);
+  }
+});
+  document.getElementById('zoomReset').onclick = ()=>{
+    scale=1; tx=0; ty=0; apply();
+    selectedYears = [2024, 2025, 2026];
+    placeMax = 3;
+    selectedCountries = 'all';
+    selectedClubs = 'all';
+    minNominations = 0;
+    hideNoVotes = false;
+    filteredPointsMode = false;
+    updateNoVotesBtn();
+    const yearCbs = [...yearPanel.querySelectorAll('input[type="checkbox"]:not([data-year="all"])')];
+    yearCbs.forEach(cb => { cb.checked = selectedYears.includes(Number(cb.dataset.year)); });
+    yearPanel.querySelector('[data-year="all"]').checked = false;
+    placeFilterEl.value = '3';
+    nomFilterEl.value = '0';
+    const cCbs = [...countryPanel.querySelectorAll('input[type="checkbox"]:not([data-country="all"])')];
+    cCbs.forEach(cb => { cb.checked = true; });
+    countryPanel.querySelector('[data-country="all"]').checked = true;
+    const clCbs = [...clubPanel.querySelectorAll('input[type="checkbox"]:not([data-club="all"])')];
+    clCbs.forEach(cb => { cb.checked = true; });
+    clubPanel.querySelector('[data-club="all"]').checked = true;
+    updateYearLabel(); updateCountryLabel(); updateClubLabel();
+    syncChartToFilter();
+    updateFilteredPointsBtn();
+  };
+
+  let hoveredName = null;
+  function distanceToSegment(px, py, x1, y1, x2, y2){
+    const dx = x2 - x1, dy = y2 - y1;
+    const len2 = dx*dx + dy*dy;
+    if (len2 === 0) return Math.hypot(px - x1, py - y1);
+    let t = ((px - x1) * dx + (py - y1) * dy) / len2;
+    t = Math.max(0, Math.min(1, t));
+    const cx = x1 + t * dx, cy = y1 + t * dy;
+    return Math.hypot(px - cx, py - cy);
+  }
+  function findNearest(mouseLocalX, mouseLocalY){
+    const pointThreshold = 15 / scale;
+    const lineThreshold = 6 / scale;
+    let nearest = null, nd = pointThreshold;
+    for (const hp of hitPoints){
+      const d = Math.hypot(hp.cx - mouseLocalX, hp.cy - mouseLocalY);
+      if (d < nd){ nd = d; nearest = { type: 'point', data: hp }; }
+    }
+    if (nearest) return nearest;
+    nd = lineThreshold;
+    for (const hl of hitLines){
+      const d = distanceToSegment(mouseLocalX, mouseLocalY, hl.x1, hl.y1, hl.x2, hl.y2);
+      if (d < nd){ nd = d; nearest = { type: 'line', data: hl }; }
+    }
+    return nearest;
+  }
+  svg.addEventListener('mousemove', (e) => {
+    if (drag) return;
+    const pt = toSvgCoords(e.clientX, e.clientY);
+    const localX = (pt.x - tx) / scale;
+    const localY = (pt.y - ty) / scale;
+    const nearest = findNearest(localX, localY);
+    if (nearest){
+      const p = nearest.data.player;
+      if (hoveredName !== p.name){
+        highlightPlayer(p.name);
+        hoveredName = p.name;
+      }
+      svg.classList.add('hover-point');
+      if (nearest.type === 'point'){
+        showTip(e, p, nearest.data.year, nearest.data.place);
+      } else {
+        showLineTip(e, p, nearest.data.year1, nearest.data.year2, nearest.data.gap);
+      }
+    } else {
+      if (hoveredName){ clearHighlight(); hoveredName = null; }
+      svg.classList.remove('hover-point');
+      hideTip();
+    }
+  });
+  svg.addEventListener('mouseleave', () => {
+    if (hoveredName){ clearHighlight(); hoveredName = null; }
+    svg.classList.remove('hover-point');
+    hideTip();
+  });
+  svg.addEventListener('touchstart', (e) => {
+    if (e.touches.length !== 1) return;
+    const t = e.touches[0];
+    const pt = toSvgCoords(t.clientX, t.clientY);
+    const localX = (pt.x - tx) / scale;
+    const localY = (pt.y - ty) / scale;
+    const nearest = findNearest(localX, localY);
+    if (nearest){
+      const p = nearest.data.player;
+      highlightPlayer(p.name);
+      if (nearest.type === 'point'){
+        showTip({clientX: t.clientX, clientY: t.clientY}, p, nearest.data.year, nearest.data.place);
+      } else {
+        showLineTip({clientX: t.clientX, clientY: t.clientY}, p, nearest.data.year1, nearest.data.year2, nearest.data.gap);
+      }
+      setTimeout(() => { clearHighlight(); hideTip(); }, 2500);
+    }
+  }, {passive: true});
+
+  const tbody = document.getElementById('allTableBody');
+  const searchInput = document.getElementById('searchAll');
+  let sortKey = 'name';
+  let sortDir = 'asc';
+
+  function sortPlayers(list){
+    const arr = list.slice();
+    arr.sort((a, b) => {
+      let va, vb;
+      if (sortKey === 'name'){ va = a.name.toLowerCase(); vb = b.name.toLowerCase(); }
+      else if (sortKey === 'best'){ va = Math.min(...Object.values(a.data)); vb = Math.min(...Object.values(b.data)); }
+      else if (sortKey === 'count'){ va = Object.keys(a.data).length; vb = Object.keys(b.data).length; }
+      if (va < vb) return sortDir === 'asc' ? -1 : 1;
+      if (va > vb) return sortDir === 'asc' ? 1 : -1;
+      return a.name.localeCompare(b.name, 'ru');
+    });
+    return arr;
+  }
+  function updateSortIndicators(){
+    document.querySelectorAll('thead th.sortable').forEach(th => {
+      th.classList.toggle('sort-active', th.dataset.sort === sortKey);
+      const ind = th.querySelector('.sort-ind');
+      ind.textContent = th.dataset.sort === sortKey ? (sortDir === 'asc' ? '▲' : '▼') : '▲';
+    });
+  }
+  function renderTable(filter=''){
+    tbody.innerHTML = '';
+    const f = filter.trim().toLowerCase();
+    const filtered = allPlayers.filter(p => {
+      if (!f) return true;
+      if (p.name.toLowerCase().includes(f)) return true;
+      if ((p.country || '').toLowerCase().includes(f)) return true;
+      if (clubsOf(p.name).some(c => c.toLowerCase().includes(f))) return true;
+      return false;
+    });
+    if (filtered.length === 0){
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td colspan="5" class="empty-row">Ничего не найдено</td>`;
+      tbody.appendChild(tr);
+      updateSortIndicators();
+      return;
+    }
+    const sorted = sortPlayers(filtered);
+    sorted.forEach(p => {
+      const ys = Object.keys(p.data).map(Number).sort((a,b)=>a-b);
+      const best = Math.min(...Object.values(p.data));
+      const tr = document.createElement('tr');
+      const onGraph = !!activePlayers[p.name];
+      if (onGraph) tr.classList.add('on-graph');
+      tr.innerHTML = `
+        <td class="name-cell">${p.name}${onGraph?'<span class="on-badge">на графике</span>':''}</td>
+        <td class="country-cell">${p.country}</td>
+        <td class="years-cell">${ys.join(', ')}</td>
+        <td class="best-cell">${best}</td>
+        <td class="count-cell">${ys.length}</td>
+      `;
+      tr.addEventListener('mouseenter', () => { if (activePlayers[p.name]) highlightPlayer(p.name); });
+      tr.addEventListener('mouseleave', () => { if (activePlayers[p.name]) clearHighlight(); });
+      tr.addEventListener('click', ()=>{
+        if (activePlayers[p.name]) removePlayer(p.name);
+        else addPlayer(p.name);
+        renderTable(searchInput.value);
+        updateFilterInfo();
+      });
+      tbody.appendChild(tr);
+    });
+    updateSortIndicators();
+  }
+  document.querySelectorAll('thead th.sortable').forEach(th => {
+    th.addEventListener('click', () => {
+      const key = th.dataset.sort;
+      if (sortKey === key) sortDir = sortDir === 'asc' ? 'desc' : 'asc';
+      else { sortKey = key; sortDir = 'asc'; }
+      renderTable(searchInput.value);
+    });
+  });
+  searchInput.addEventListener('input', ()=>renderTable(searchInput.value));
+
+  const filterInfo = document.getElementById('filterInfo');
+  function updateFilterInfo(){
+    const matching = getMatchingPlayers().length;
+    const shown = Object.keys(activePlayers).length;
+    let parts = [];
+    if (selectedYears === 'all') parts.push('все годы');
+    else if (selectedYears.length === 0) parts.push('годы не выбраны');
+    else if (selectedYears.length === 1) parts.push(`год ${selectedYears[0]}`);
+    else parts.push(`годы: ${selectedYears.slice().sort().join(', ')}`);
+    parts.push(placeMax === 1 ? 'только 1-е место' : placeMax < 30 ? `место ≤ ${placeMax}` : 'все места');
+    if (minNominations > 0) parts.push(`номинаций > ${minNominations}`);
+    if (selectedCountries !== 'all'){
+      if (selectedCountries.length === 0) parts.push('страны не выбраны');
+      else if (selectedCountries.length === 1) parts.push(`страна: ${selectedCountries[0]}`);
+      else parts.push(`${selectedCountries.length} стран`);
+    }
+    if (selectedClubs !== 'all'){
+      if (selectedClubs.length === 0) parts.push('клубы не выбраны');
+      else if (selectedClubs.length === 1) parts.push(`клуб: ${selectedClubs[0]}`);
+      else parts.push(`${selectedClubs.length} клубов`);
+    }
+let info = `Фильтр: ${parts.join(' · ')} — подходит <strong>${matching}</strong> игроков, на графике <strong>${shown}</strong>.`;
+if (filteredPointsMode) info += ` <span style="color:#2563eb;font-weight:500">На графике только выбранные точки.</span>`;
+if (matching > 40) info += ` <span class="warn">Много линий — сузьте фильтры для читаемости.</span>`;
+filterInfo.innerHTML = info;
+  }
+
+  (function initYearAllCheckbox(){
+    const allCb = yearPanel.querySelector('[data-year="all"]');
+    const yearCbs = [...yearPanel.querySelectorAll('input[type="checkbox"]:not([data-year="all"])')];
+    allCb.checked = yearCbs.every(cb => cb.checked);
+  })();
+  updateYearLabel();
+  updateCountryLabel();
+  updateClubLabel();
+
+  const toggleChipsBtn = document.getElementById('toggleChips');
+  const topBar = document.getElementById('topBar');
+  toggleChipsBtn.addEventListener('click', () => {
+    const hidden = topBar.classList.toggle('hide-chips');
+    toggleChipsBtn.textContent = hidden ? 'Показать имена' : 'Скрыть имена';
+  });
+  const toggleSummaryBtn = document.getElementById('toggleSummary');
+  toggleSummaryBtn.addEventListener('click', () => {
+    const hidden = topBar.classList.toggle('hide-summary');
+    toggleSummaryBtn.textContent = hidden ? 'Показать таблицу' : 'Скрыть таблицу';
+  });
+  syncChartToFilter();
+  apply();
+    document.getElementById('downloadPng').onclick = () => {
+    const svgEl = document.querySelector('#chartWrap svg');
+    if (!svgEl) return;
+
+    const clone = svgEl.cloneNode(true);
+    clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+
+    const bg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    bg.setAttribute('x', '0');
+    bg.setAttribute('y', '0');
+    bg.setAttribute('width', String(W));
+    bg.setAttribute('height', String(H));
+    bg.setAttribute('fill', '#ffffff');
+    clone.insertBefore(bg, clone.firstChild);
+
+    const styleEl = document.createElementNS('http://www.w3.org/2000/svg', 'style');
+    styleEl.textContent = `
+      text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; }
+      .series-lines { cursor: default; }
+    `;
+    clone.insertBefore(styleEl, clone.firstChild);
+
+    const serialized = new XMLSerializer().serializeToString(clone);
+    const svgBlob = new Blob([serialized], {type: 'image/svg+xml;charset=utf-8'});
+    const url = URL.createObjectURL(svgBlob);
+
+    const img = new Image();
+    img.onload = () => {
+      const scaleFactor = 2;
+      const canvas = document.createElement('canvas');
+      canvas.width = W * scaleFactor;
+      canvas.height = H * scaleFactor;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      URL.revokeObjectURL(url);
+
+      canvas.toBlob(blob => {
+        if (!blob) return;
+        const a = document.createElement('a');
+        const stamp = new Date().toISOString().slice(0, 10);
+        a.href = URL.createObjectURL(blob);
+        a.download = `golden-ball-${stamp}.png`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+      }, 'image/png');
+    };
+    img.onerror = () => {
+      URL.revokeObjectURL(url);
+      alert('Не удалось подготовить PNG. Попробуйте ещё раз.');
+    };
+    img.src = url;
+  };
+})();
+</script>
+</body>
+</html>
