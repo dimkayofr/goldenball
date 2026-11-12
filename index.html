@@ -246,6 +246,7 @@
   <button class="btn" id="zoomReset" title="Сбросить фильтры и зум графика">Сброс</button>
   <button class="btn" id="toggleNoVotes">Скрыть игроков без голосов</button>
   <button class="btn" id="toggleFilteredPoints" title="Показать только точки, соответствующие текущим фильтрам">Только выбранные годы</button>
+  <button class="btn" id="toggleNarrowYears" title="Скрыть годы без точек на графике">Убрать пустые годы с оси Х</button>
   <button class="btn" id="toggleChips" title="Свернуть/развернуть список игроков">Скрыть имена</button>
   <button class="btn" id="toggleSummary" title="Свернуть/развернуть сводную таблицу клубов и стран">Скрыть таблицу</button>
 </div>
@@ -963,10 +964,16 @@
   const W = 1100;
   let H = 480;
   const plot = {left:80, right:1040, top:35, bottom:430};
+  let visibleYears = years.slice();
   let currentMaxPlace = 30;
   let currentLayout = {};
 
-  const xOf = y => plot.left + years.indexOf(y) * (plot.right - plot.left) / (years.length - 1);
+  const xOf = y => {
+  const idx = visibleYears.indexOf(y);
+  if (idx === -1) return plot.left;                       // на всякий случай
+  if (visibleYears.length === 1) return (plot.left + plot.right) / 2;
+  return plot.left + idx * (plot.right - plot.left) / (visibleYears.length - 1);
+};
   const yOf = p => plot.top + (p - 1) * (plot.bottom - plot.top) / (currentMaxPlace - 1);
 
   const svg = document.createElementNS(svgNS, 'svg');
@@ -996,8 +1003,8 @@
 
   function drawGrid(){
     while (gGrid.firstChild) gGrid.removeChild(gGrid.firstChild);
-    years.forEach(y => el('line', {x1:xOf(y), y1:plot.top, x2:xOf(y), y2:plot.bottom,
-      stroke:'#eff1f3', 'stroke-width':1}, gGrid));
+visibleYears.forEach(y => el('line', {x1:xOf(y), y1:plot.top, x2:xOf(y), y2:plot.bottom,
+  stroke:'#eff1f3', 'stroke-width':1}, gGrid));
     for (let p = 1; p <= currentMaxPlace; p++){
       const major = (p===1 || p%5===0);
       el('line', {x1:plot.left, y1:yOf(p), x2:plot.right, y2:yOf(p),
@@ -1020,12 +1027,12 @@
         'font-size': major?11:9, 'font-weight': major?600:400, fill: major?'#333':'#888'}, gAxes);
       t2.textContent = p;
     }
-    years.forEach(y => {
-      const t1 = el('text', {x:xOf(y), y:plot.bottom+22, 'text-anchor':'middle','font-size':11, fill:'#333'}, gAxes);
-      t1.textContent = y;
-      const t2 = el('text', {x:xOf(y), y:plot.top-18, 'text-anchor':'middle','font-size':11, fill:'#333'}, gAxes);
-      t2.textContent = y;
-    });
+visibleYears.forEach(y => {
+  const t1 = el('text', {x:xOf(y), y:plot.bottom+22, 'text-anchor':'middle','font-size':11, fill:'#333'}, gAxes);
+  t1.textContent = y;
+  const t2 = el('text', {x:xOf(y), y:plot.top-18, 'text-anchor':'middle','font-size':11, fill:'#333'}, gAxes);
+  t2.textContent = y;
+});
     const ax = el('text', {x:(plot.left+plot.right)/2, y:plot.bottom+40, 'text-anchor':'middle','font-size':12,fill:'#666'}, gAxes);
     ax.textContent = 'Год вручения';
     const ay = el('text', {x:22, y:(plot.top+plot.bottom)/2, 'text-anchor':'middle','font-size':12, fill:'#666',
@@ -1046,6 +1053,17 @@
   let nextBadgeNum = 1;
   let hitPoints = [];
   let hitLines = [];
+
+function computeVisibleYears(){
+  if (!narrowYearsMode) return years.slice();
+  const set = new Set();
+  Object.values(activePlayers).forEach(p => {
+    Object.keys(p.data).map(Number).forEach(y => {
+      if (isPointVisible(p, y)) set.add(y);
+    });
+  });
+  return Array.from(set).sort((a, b) => a - b);
+}
 
   function recomputeLayout(){
     currentLayout = {};
@@ -1224,28 +1242,30 @@ function drawBadge(p, num){
     t.textContent = num;
   }
 
-  function rebuildHitPoints(){
-    hitPoints = [];
-    hitLines = [];
-    Object.values(activePlayers).forEach(p => {
-      const ys = Object.keys(p.data).map(Number).sort((a,b)=>a-b);
-      ys.forEach(y => {
-        const cx = xOf(y) + getXOffset(p.name, y);
-        const cy = yOf(getYPlace(p.name, y));
-        hitPoints.push({cx, cy, player: p, year: y, place: p.data[y]});
-      });
-for (let i = 0; i < ys.length - 1; i++){
-  const y1 = ys[i], y2 = ys[i+1];
-  let gap = false;
-  for (let y = y1+1; y < y2; y++){ if (y !== 2020 && years.includes(y)){ gap = true; break; } }
-  const x1 = xOf(y1) + getXOffset(p.name, y1);
-  const x2 = xOf(y2) + getXOffset(p.name, y2);
-  const cy1 = yOf(getYPlace(p.name, y1));
-  const cy2 = yOf(getYPlace(p.name, y2));
-  hitLines.push({x1, y1: cy1, x2, y2: cy2, player: p, year1: y1, year2: y2, gap});
-}
+function rebuildHitPoints(){
+  hitPoints = [];
+  hitLines = [];
+  Object.values(activePlayers).forEach(p => {
+    const ys = Object.keys(p.data).map(Number)
+      .filter(y => isPointVisible(p, y))
+      .sort((a,b)=>a-b);
+    ys.forEach(y => {
+      const cx = xOf(y) + getXOffset(p.name, y);
+      const cy = yOf(getYPlace(p.name, y));
+      hitPoints.push({cx, cy, player: p, year: y, place: p.data[y]});
     });
-  }
+    for (let i = 0; i < ys.length - 1; i++){
+      const y1 = ys[i], y2 = ys[i+1];
+      let gap = false;
+      for (let y = y1+1; y < y2; y++){ if (y !== 2020 && years.includes(y)){ gap = true; break; } }
+      const x1 = xOf(y1) + getXOffset(p.name, y1);
+      const x2 = xOf(y2) + getXOffset(p.name, y2);
+      const cy1 = yOf(getYPlace(p.name, y1));
+      const cy2 = yOf(getYPlace(p.name, y2));
+      hitLines.push({x1, y1: cy1, x2, y2: cy2, player: p, year1: y1, year2: y2, gap});
+    }
+  });
+}
 
   // Для стран: только год (место и клуб — не влияют: игрок представляет страну всегда)
   function isCountryNomination(p, y){
@@ -1397,6 +1417,7 @@ function isPointVisible(p, year){
   }
 
   function redrawAll(){
+    visibleYears = computeVisibleYears();
     recomputeLayout();
     updateDimensions();
     drawGrid();
@@ -1433,6 +1454,7 @@ function isPointVisible(p, year){
   let minNominations = 0;
   let hideNoVotes = false;
   let filteredPointsMode = false;
+  let narrowYearsMode = false;
 
   function matchesFilter(p){
     if (!isGraphEligible(p)) return false;
@@ -1662,6 +1684,24 @@ toggleFilteredPointsBtn.addEventListener('click', () => {
   updateFilterInfo();
 });
 updateFilteredPointsBtn();
+const toggleNarrowYearsBtn = document.getElementById('toggleNarrowYears');
+function updateNarrowYearsBtn(){
+  if (!toggleNarrowYearsBtn) return;
+  toggleNarrowYearsBtn.textContent = narrowYearsMode
+    ? 'Показать всю ось Х'
+    : 'Убрать годы без точек с оси Х';
+  toggleNarrowYearsBtn.classList.toggle('active', narrowYearsMode);
+  toggleNarrowYearsBtn.title = narrowYearsMode
+    ? 'Показать все годы на оси X (даже если нет точек)'
+    : 'Скрыть годы без видимых точек на оси Х';
+}
+toggleNarrowYearsBtn.addEventListener('click', () => {
+  narrowYearsMode = !narrowYearsMode;
+  updateNarrowYearsBtn();
+  redrawAll();
+  updateFilterInfo();
+});
+updateNarrowYearsBtn();
 
   let scale=1, tx=0, ty=0;
   function apply(){
@@ -1725,8 +1765,10 @@ document.addEventListener('keydown', (e) => {
     selectedClubs = 'all';
     minNominations = 0;
     hideNoVotes = false;
-    filteredPointsMode = false;
-    updateNoVotesBtn();
+filteredPointsMode = false;
+narrowYearsMode = false;
+updateNoVotesBtn();
+updateNarrowYearsBtn();
     const yearCbs = [...yearPanel.querySelectorAll('input[type="checkbox"]:not([data-year="all"])')];
     yearCbs.forEach(cb => { cb.checked = selectedYears.includes(Number(cb.dataset.year)); });
     yearPanel.querySelector('[data-year="all"]').checked = false;
